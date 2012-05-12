@@ -1,0 +1,8 @@
+﻿@model IPagedList
+@Ajax.Pager(Model, new PagerOptions
+{
+    CurrentPagerItemWrapperFormatString = "<b>{0}</b>",
+    Id = "pager",
+    PageIndexParameterName = "id"
+}, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "ajaxContent", OnSuccess = "SetUrl" })
+<input type="hidden" name="ajaxUrl" id="ajaxUrl" value="@Request.Url.ToString()" />

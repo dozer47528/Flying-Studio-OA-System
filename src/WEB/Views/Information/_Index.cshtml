@@ -1,0 +1,14 @@
+﻿@model PagedList<Article>
+<table>
+    @{bool line = true;}
+    @foreach (var article in Model)
+    { 
+        <tr class="@string.Format(line ? "odd" : "")">
+            <td>Duis adipiscing lorem iaculis nunc</td>
+            <td class="action"><a href="#" class="view">View</a><a href="#" class="edit">Edit</a>
+                <a href="#" class="delete">Delete</a></td>
+        </tr>
+        line = !line;
+    }
+</table>
+@Html.Partial("_Pager", Model)

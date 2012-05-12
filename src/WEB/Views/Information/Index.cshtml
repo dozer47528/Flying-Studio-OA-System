@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "最新公告 | 信息共享平台 | 办公OA系统";
+    Layout = "~/Views/Information/_Layout.cshtml";
+}
+@model PagedList<Article>
+<!-- h2 stays for breadcrumbs -->
+<h2>@Html.ActionLink("办公OA系统", "Index", "Home") &raquo;
+    @Html.ActionLink("信息共享平台", "Index", "Information") &raquo;
+    @Html.ActionLink("最新公告", "Index", "Information", new { @class = "active" })
+</h2>
+<div id="main">
+    <div id="ajaxContent">
+        @Html.Partial("_Index", Model)
+    </div>
+</div>
+<!-- // #main -->

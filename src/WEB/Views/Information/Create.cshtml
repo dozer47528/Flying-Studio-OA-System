@@ -1,0 +1,38 @@
+﻿@model MODEL.Article
+@{
+    ViewBag.Title = "新增公告 | 信息共享平台 | 办公OA系统";
+    Layout = "~/Views/Information/_Layout.cshtml";
+}
+<h2>@Html.ActionLink("办公OA系统", "Index", "Home") &raquo;
+    @Html.ActionLink("信息共享平台", "Index", "Information") &raquo;
+    @Html.ActionLink("最新公告", "Index", "Information") &raquo;
+    @Html.ActionLink("新增公告", "Create", "Information", new { @class = "active" })
+</h2>
+<div id="main">
+    <form action="" class="jNice2">
+    <fieldset>
+        <p>
+            @Html.LabelFor(m => m.Title)
+            @Html.TextBoxFor(m => m.Title, new { @class = "text-full" })
+            @Html.ValidationMessageFor(m => m.Title)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Authority)
+            <span>
+                <input type="checkbox" id="userrole_all" name="userrole_all" value="" onchange="UserRoleSelect();" />全部
+            </span>
+            @foreach (var role in ViewBag.UserRole as List<UserRole>)
+            {
+                <span>
+                    <input type="checkbox" class="userrole" name="userrole" value="@role.RoleEnum" />@role.Name</span>
+            }
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Content)
+            <textarea class="xheditor-mfull {width:'660px'}"></textarea>
+        </p>
+        <input type="submit" value="Submit Query" />
+    </fieldset>
+    </form>
+</div>
+<!-- // #main -->

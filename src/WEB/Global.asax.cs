@@ -9,7 +9,11 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using BLL;
 using DAL;
+using Ninject;
+using Ninject.Web.Common;
+using WEB.Controllers;
 
 namespace WEB
 {
@@ -36,10 +40,14 @@ namespace WEB
 
         protected void Application_Start()
         {
-            var db = new DataBase();
-            db.Database.CreateIfNotExists();
-            db.SaveChanges();
-
+            var db = new OAContext();
+            if (!db.Database.Exists())
+            {
+                db.Database.Create();
+                db.InitData();
+                db.InitTestData();
+                db.SaveChanges();
+            }
 
             AreaRegistration.RegisterAllAreas();
 

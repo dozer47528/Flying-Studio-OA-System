@@ -52,9 +52,9 @@
       <Project>{affa0d3c-854c-4781-827b-4ff38d6fa9be}</Project>
       <Name>MODEL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Unitity\Unitity.csproj">
+    <ProjectReference Include="..\Utility\Utility.csproj">
       <Project>{dadd901a-dcbd-42b2-8ceb-a1e709638db3}</Project>
-      <Name>Unitity</Name>
+      <Name>Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
