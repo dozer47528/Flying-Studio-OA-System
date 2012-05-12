@@ -5,7 +5,7 @@
     <link href="@Url.Content("~/Content/transdmin.css")" rel="stylesheet" type="text/css" media="screen" />
     <!--[if IE 6]><link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/ie6.css")" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/ie7.css")" /><![endif]-->
-    <link href="@System.Web.Optimization.BundleTable.Bundles.ResolveBundleUrl("~/Content/themes/base/css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui-1.8.20.custom.css")" rel="stylesheet" type="text/css" media="screen" />
 </head>
 <body>
     <div id="wrapper">
@@ -40,7 +40,6 @@
     <input id="action" type="hidden" value="@Html.ViewContext.RouteData.Values["action"].ToString().ToLower()"/>
 </body>
 <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jNice.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery-ui-1.8.19.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>

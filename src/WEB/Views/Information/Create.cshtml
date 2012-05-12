@@ -9,26 +9,30 @@
     @Html.ActionLink("新增公告", "Create", "Information", new { @class = "active" })
 </h2>
 <div id="main">
-    <form action="" class="jNice2">
+    <br />
+    <form action="">
     <fieldset>
         <p>
             @Html.LabelFor(m => m.Title)
+            <br />
+            <br />
             @Html.TextBoxFor(m => m.Title, new { @class = "text-full" })
             @Html.ValidationMessageFor(m => m.Title)
         </p>
         <p>
             @Html.LabelFor(m => m.Authority)
-            <span>
-                <input type="checkbox" id="userrole_all" name="userrole_all" value="" onchange="UserRoleSelect();" />全部
-            </span>
+            <br />
+            <br />
             @foreach (var role in ViewBag.UserRole as List<UserRole>)
             {
-                <span>
-                    <input type="checkbox" class="userrole" name="userrole" value="@role.RoleEnum" />@role.Name</span>
+                <input type="checkbox" id="checkbox_@role.RoleEnum" name="userrole" value="@role.RoleEnum" />
+                <label for="checkbox_@role.RoleEnum">@role.Name</label>
             }
         </p>
         <p>
             @Html.LabelFor(m => m.Content)
+            <br />
+            <br />
             <textarea class="xheditor-mfull {width:'660px'}"></textarea>
         </p>
         <input type="submit" value="Submit Query" />

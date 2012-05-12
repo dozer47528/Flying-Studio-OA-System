@@ -1,6 +1,7 @@
 ﻿$(function () {
     SetNavClass('mainNav', 'active');
     SetNavClass('sideNav', 'active');
+    SetJqueryUI();
 });
 
 function SetNavClass(ulId, className) {
@@ -41,4 +42,8 @@ function UserRoleSelect() {
     else {
         $('.userrole').removeAttr('checked');
     }
+}
+
+function SetJqueryUI() {
+    $("form input:submit,form input:checkbox,form button").button();
 }
