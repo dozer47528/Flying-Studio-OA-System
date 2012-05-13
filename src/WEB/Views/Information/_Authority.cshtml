@@ -1,0 +1,9 @@
+﻿@model MODEL.Article
+@foreach (var role in ViewBag.UserRole as List<UserRole>)
+{
+    var isChecked = false;
+    if (Model == null || (role.RoleEnum & Model.Authority) == role.RoleEnum) { isChecked = true; }
+    <input @Html.Raw(isChecked ? "checked=\"checked\"" : "") type="checkbox" id="checkbox_@role.RoleEnum" name="userrole" value="@role.RoleEnum" />
+    <label for="checkbox_@role.RoleEnum">@role.Name
+    </label>
+}

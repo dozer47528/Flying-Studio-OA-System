@@ -4,9 +4,10 @@
     @foreach (var article in Model)
     { 
         <tr class="@string.Format(line ? "odd" : "")">
-            <td>Duis adipiscing lorem iaculis nunc</td>
-            <td class="action"><a href="#" class="view">View</a><a href="#" class="edit">Edit</a>
-                <a href="#" class="delete">Delete</a></td>
+            <td>@article.Title</td>
+            <td class="action"><a href="" class="view">View </a><a href="@Url.Action("Edit", new { id = article.ID })" class="edit">
+                Edit</a><a onclick="return ConfirmDelete();" href="@Url.Action("Delete", new { id = article.ID })" class="delete">Delete
+                </a></td>
         </tr>
         line = !line;
     }

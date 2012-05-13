@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using BLL;
 using MODEL;
 using Ninject;
+using Utility;
 
 namespace WEB.Controllers
 {
-    public class InformationController : Controller
+    public class InformationController : BaseController
     {
         [Inject]
         public InboxService InboxService { get; set; }
@@ -26,17 +27,68 @@ namespace WEB.Controllers
             }
             return View(ArticleService.GetList(id ?? 1));
         }
-
         public ActionResult Create()
         {
+            ConvertFromUrl();
             ViewBag.UserRole = UserRoleService.GetList();
-
             return View();
         }
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult Create(Article article)
         {
-            return View();
+            try
+            {
+                ArticleService.Create(article, Request["userrole"]);
+            }
+            catch (ModelExceptions e)
+            {
+                e.FillModelState(ModelState);
+            }
+            if (ModelState.IsValid)
+            {
+                return RedirectFrom();
+            }
+            else
+            {
+                ViewBag.UserRole = UserRoleService.GetList();
+                return View(article);
+            }
+        }
+
+        public ActionResult Edit(int? id)
+        {
+            ConvertFromUrl();
+            ViewBag.UserRole = UserRoleService.GetList();
+            return View(ArticleService.GetItemById(id ?? 0));
+        }
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult Edit(Article article)
+        {
+            try
+            {
+                ArticleService.Edit(article, Request["userrole"]);
+            }
+            catch (ModelExceptions e)
+            {
+                e.FillModelState(ModelState);
+            }
+            if (ModelState.IsValid)
+            {
+                return RedirectFrom();
+            }
+            else
+            {
+                ViewBag.UserRole = UserRoleService.GetList();
+                return View(article);
+            }
+        }
+
+        public ActionResult Delete(int? id)
+        {
+            ArticleService.Delete(id ?? 0);
+            return RedirectFrom();
         }
     }
 }

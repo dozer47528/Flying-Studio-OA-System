@@ -1,15 +1,15 @@
 ﻿$(function () {
-    SetNavClass('mainNav', 'active');
-    SetNavClass('sideNav', 'active');
+    SetNavClass('#mainNav', 'active');
+    SetNavClass('.sideNav', 'active');
     SetJqueryUI();
 });
 
-function SetNavClass(ulId, className) {
+function SetNavClass(item, className) {
     var controller = $('#controller').val();
     var action = $('#action').val();
     eval('controller_' + controller + ' = true');
     eval('action_' + action + ' = true');
-    list = $('#' + ulId + ' *');
+    list = $(item + ' *');
 
     for (var k = 0; k < list.length; k++) {
         item = list[k];
@@ -45,5 +45,9 @@ function UserRoleSelect() {
 }
 
 function SetJqueryUI() {
-    $("form input:submit,form input:checkbox,form button").button();
+    $("form input:submit,form input:checkbox,form input:radio,form button").button();
+}
+
+function ConfirmDelete() {
+    return confirm('确认删除?');
 }
