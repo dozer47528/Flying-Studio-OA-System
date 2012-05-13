@@ -57,6 +57,7 @@ namespace WEB.App_Start
             kernel.Bind<InboxService>().ToSelf().InRequestScope();
             kernel.Bind<ArticleService>().ToSelf().InRequestScope();
             kernel.Bind<UserRoleService>().ToSelf().InRequestScope();
+            kernel.Bind<UploadFileService>().ToSelf().InRequestScope();
         }
     }
 }

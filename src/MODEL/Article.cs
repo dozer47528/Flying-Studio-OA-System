@@ -11,6 +11,15 @@ namespace MODEL
         public int ID { get; set; }
         [Display(Name = "标题"), Required]
         public string Title { get; set; }
+        private Guid? tempID;
+        public Guid TempID
+        {
+            get
+            {
+                if (tempID == null) { tempID = Guid.NewGuid(); }
+                return tempID.Value;
+            }
+        }
         [Display(Name = "内容")]
         public string Content { get; set; }
         public DateTime AddDate { get; set; }

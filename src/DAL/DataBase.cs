@@ -16,6 +16,12 @@ namespace DAL
         public DbSet<UploadFile> UploadFileSet { get; set; }
         public DbSet<UserRole> UserRoleSet { get; set; }
         public DbSet<Inbox> InboxSet { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Article>().Ignore(a => a.TempID);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 
     public static class DataBaseEntension

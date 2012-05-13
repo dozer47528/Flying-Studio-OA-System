@@ -31,20 +31,13 @@ namespace WEB.Controllers
         {
             ConvertFromUrl();
             ViewBag.UserRole = UserRoleService.GetList();
-            return View();
+            return View(new Article());
         }
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create(Article article)
         {
-            try
-            {
-                ArticleService.Create(article, Request["userrole"]);
-            }
-            catch (ModelExceptions e)
-            {
-                e.FillModelState(ModelState);
-            }
+            ArticleService.Create(article, Request["userrole"]);
             if (ModelState.IsValid)
             {
                 return RedirectFrom();
@@ -66,14 +59,7 @@ namespace WEB.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(Article article)
         {
-            try
-            {
-                ArticleService.Edit(article, Request["userrole"]);
-            }
-            catch (ModelExceptions e)
-            {
-                e.FillModelState(ModelState);
-            }
+            ArticleService.Edit(article, Request["userrole"]);
             if (ModelState.IsValid)
             {
                 return RedirectFrom();
@@ -89,6 +75,11 @@ namespace WEB.Controllers
         {
             ArticleService.Delete(id ?? 0);
             return RedirectFrom();
+        }
+
+        public ActionResult Detail(int? id)
+        {
+            return View(ArticleService.GetItemById(id ?? 0));
         }
     }
 }

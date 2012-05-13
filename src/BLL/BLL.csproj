@@ -55,6 +55,7 @@
     <Compile Include="InboxService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ArticleService.cs" />
+    <Compile Include="UploadFileService.cs" />
     <Compile Include="UserRoleService.cs" />
   </ItemGroup>
   <ItemGroup>

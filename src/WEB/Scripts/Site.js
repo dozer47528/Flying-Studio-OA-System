@@ -45,7 +45,7 @@ function UserRoleSelect() {
 }
 
 function SetJqueryUI() {
-    $("form input:submit,form input:checkbox,form input:radio,form button").button();
+    $("input,button").button();
 }
 
 function ConfirmDelete() {

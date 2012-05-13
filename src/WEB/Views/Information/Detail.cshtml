@@ -1,0 +1,28 @@
+﻿@model Article
+@{
+    ViewBag.Title = "查看公告 | 最新公告 | 信息共享平台 | 办公OA系统";
+    Layout = "~/Views/Information/_Layout.cshtml";
+}
+<!-- h2 stays for breadcrumbs -->
+<h2>
+    @Html.ActionLink("最新公告", "Index", "Information") &raquo;
+    @Html.ActionLink("查看公告", "Detail", "Information", new { id = Model.ID }, new { @class = "active" })
+    @if (Request.UrlReferrer != null)
+    {
+        @Html.Raw(" &raquo; ")
+        <a href="@Request.UrlReferrer.ToString()">返回来源页面</a>
+    }
+</h2>
+<div id="main">
+    <br />
+    <div id="article_title">
+        <h3>@Model.Title</h3>
+    </div>
+    <div id="article_info">
+        [@Model.AddDate.ToString()]
+    </div>
+    <div id="article_content">
+        @Html.Raw(Model.Content)
+    </div>
+</div>
+<!-- // #main -->

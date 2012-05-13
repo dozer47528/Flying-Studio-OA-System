@@ -136,10 +136,10 @@ h2 {
     width: 718px;
     float: right;
     color: #646464;
-    font-size: 16px;
+    font-size: 12px;
     line-height: 16px;
     font-weight: bold;
-    margin: 20px 0 0 0;
+    margin: 15px 0 0 0;
     padding: 0 0 10px 0;
     border-bottom: 1px solid #ddd;
 }
@@ -347,29 +347,36 @@ h3 {
 
 /* Styles for validation helpers
 -----------------------------------------------------------*/
-.field-validation-error
-{
+.field-validation-error {
     color: #ff0000;
 }
 
-.field-validation-valid
-{
+.field-validation-valid {
     display: none;
 }
 
-.input-validation-error
-{
+.input-validation-error {
     border: 1px solid #ff0000;
     background-color: #ffeeee;
 }
 
-.validation-summary-errors
-{
+.validation-summary-errors {
     font-weight: bold;
     color: #ff0000;
 }
 
-.validation-summary-valid
-{
+.validation-summary-valid {
     display: none;
 }
+
+
+/* Styles for Content
+-----------------------------------------------------------*/
+#main #article_title, #main #article_info {
+    width: 100%;
+    text-align: center;
+}
+
+    #main #article_title h3 {
+        font-size: 16px;
+    }

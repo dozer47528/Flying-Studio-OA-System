@@ -5,9 +5,10 @@
     { 
         <tr class="@string.Format(line ? "odd" : "")">
             <td>@article.Title</td>
-            <td class="action"><a href="" class="view">View </a><a href="@Url.Action("Edit", new { id = article.ID })" class="edit">
-                Edit</a><a onclick="return ConfirmDelete();" href="@Url.Action("Delete", new { id = article.ID })" class="delete">Delete
-                </a></td>
+            <td class="action"><a href="@Url.Action("Detail", new { id = article.ID })" class="view">
+                查看</a><a href="@Url.Action("Edit", new { id = article.ID })" class="edit">编辑</a>
+                <a onclick="return ConfirmDelete();" href="@Url.Action("Delete", new { id = article.ID })" class="delete">
+                    删除 </a></td>
         </tr>
         line = !line;
     }
