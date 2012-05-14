@@ -18,6 +18,6 @@ namespace MODEL
         public DateTime FirstLoginDate { get; set; }//首次登陆时间
         public DateTime LastLoginDate { get; set; }//上次登录时间
         public int LoginTimes { get; set; }//登录次数
-        public UserRole Role { get; set; }//角色
+        public virtual UserRole Role { get; set; }//角色
     }
 }

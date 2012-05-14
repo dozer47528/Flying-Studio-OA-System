@@ -1,7 +1,7 @@
 ﻿@model string
 <table>
     @{
-        var items = Json.Decode<List<UploadFile>>(CookieHelper.Get(Model)) ?? new List<UploadFile>();
+        var items = JsonConvert.DeserializeObject<List<UploadFile>>(CookieHelper.Get(Model)) ?? new List<UploadFile>();
         var isSingle = true;
     }
     @foreach (var file in items)

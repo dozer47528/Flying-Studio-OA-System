@@ -16,6 +16,12 @@ namespace BLL
         public Article GetItemById(int id)
         {
             return db.ArticleSet.Single(a => a.ID == id);
+
+        }
+        public Article GetItemByIdWithAttachment(int id)
+        {
+            var item = db.ArticleSet.Include("Attachment").Single(a => a.ID == id);
+            return item;
         }
         public PagedList<Article> GetList(int page, int pageSize = 10, string search = null)
         {

@@ -4,11 +4,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Web;
-using System.Web.Helpers;
 using DAL;
 using MODEL;
 using Ninject;
 using Utility;
+using Newtonsoft.Json;
 
 namespace BLL
 {
@@ -67,12 +67,12 @@ namespace BLL
         {
             var saved = db.UploadFileSet.Where(f => f.Article.ID == id).ToList();
             saved.ForEach(f => f.Article = null);//可以优化
-            CookieHelper.PostTemp(guid, Json.Encode(saved));
+            CookieHelper.PostTemp(guid, JsonConvert.SerializeObject(saved));
         }
 
         public void SaveArticleFile(Article article)
         {
-            var items = Json.Decode<List<UploadFile>>(CookieHelper.Get(article.TempID.ToString())) ?? new List<UploadFile>();
+            var items = JsonConvert.DeserializeObject<List<UploadFile>>(CookieHelper.Get(article.TempID.ToString())) ?? new List<UploadFile>();
             var saved = db.UploadFileSet.Where(f => f.Article.ID == article.ID).ToList();
 
             foreach (var i in items)
@@ -110,7 +110,7 @@ namespace BLL
 
         public void RemoveFile(string guid, string id)
         {
-            var items = Json.Decode<List<UploadFile>>(CookieHelper.Get(guid)) ?? new List<UploadFile>();
+            var items = JsonConvert.DeserializeObject<List<UploadFile>>(CookieHelper.Get(guid)) ?? new List<UploadFile>();
             var item = items.FirstOrDefault(i => i.TempID.ToString() == id);
             if (item == null) return;
             items.Remove(item);
@@ -119,25 +119,24 @@ namespace BLL
             {
                 File.Delete(fullPath);
             }
-            CookieHelper.PostTemp(guid, Json.Encode(items));
+            CookieHelper.PostTemp(guid, JsonConvert.SerializeObject(items));
         }
         public void AppendFile(string guid, HttpPostedFileBase file)
         {
-            var items = Json.Decode<List<UploadFile>>(CookieHelper.Get(guid)) ?? new List<UploadFile>();
+            var items = JsonConvert.DeserializeObject<List<UploadFile>>(CookieHelper.Get(guid)) ?? new List<UploadFile>();
 
             var fileName = SaveFile(file);
 
             var fileInfo = new UploadFile
             {
                 AddDate = DateTime.Now,
-                DownloadTimes = 0,
                 Extension = fileName.Item3,
                 FileName = Uri.EscapeDataString(fileName.Item2),
                 Path = string.Format("{0}/{1}", TempUrl, fileName.Item1),
             };
 
             items.Add(fileInfo);
-            CookieHelper.PostTemp(guid, Json.Encode(items));
+            CookieHelper.PostTemp(guid, JsonConvert.SerializeObject(items));
         }
         private Tuple<string, string, string> SaveFile(HttpPostedFileBase file)
         {

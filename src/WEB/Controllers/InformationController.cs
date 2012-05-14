@@ -86,7 +86,7 @@ namespace WEB.Controllers
 
         public ActionResult Detail(int? id)
         {
-            return View(ArticleService.GetItemById(id ?? 0));
+            return View(ArticleService.GetItemByIdWithAttachment(id ?? 0));
         }
     }
 }

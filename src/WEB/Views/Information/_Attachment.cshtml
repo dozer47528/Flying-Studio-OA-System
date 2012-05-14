@@ -1,0 +1,15 @@
+﻿@model List<UploadFile>
+<table>
+    @{
+        var isSingle = true;
+    }
+    @foreach (var file in Model)
+    { 
+        <tr class="@(isSingle ? "" : "odd")">
+            <td>@(Uri.UnescapeDataString(file.FileName) + file.Extension)</td>
+            <td class="action"><a target="_blank" href="@Url.Content(file.Path)" class="view">下载
+            </a></td>
+        </tr>
+        isSingle = !isSingle;
+    }
+</table>
