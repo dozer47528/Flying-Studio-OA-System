@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorityHelper.cs" />
-    <Compile Include="Cookie.cs" />
+    <Compile Include="CookieHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MvcUrlHelper.cs" />
     <Compile Include="StringExtension.cs" />

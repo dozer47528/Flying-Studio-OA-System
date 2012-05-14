@@ -23,23 +23,24 @@ namespace BLL
             Filter(q, search);
             return q.ToPagedList(page, pageSize);
         }
-        public void Create(Article article, string autority)
+        public Article Create(Article article, string autority)
         {
             article.Authority = string.IsNullOrEmpty(autority) ? 0 : AuthorityHelper.GetAuthority(autority.Split(','));
             article.AddDate = DateTime.Now;
-            //article.Attachment
             //article.Owner
             db.ArticleSet.Add(article);
             db.SaveChanges();
+            return article;
         }
-        public void Edit(Article article, string autority)
+        public Article Edit(Article article, string autority)
         {
             var old = db.ArticleSet.Single(a => a.ID == article.ID);
             old.Authority = string.IsNullOrEmpty(autority) ? 0 : AuthorityHelper.GetAuthority(autority.Split(','));
             old.Title = article.Title;
             old.Content = article.Content;
-            //old.Attachment
+            old.TempID = article.TempID;
             db.SaveChanges();
+            return old;
         }
         public void Delete(int id)
         {

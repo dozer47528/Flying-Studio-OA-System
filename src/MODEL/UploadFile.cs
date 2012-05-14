@@ -13,5 +13,19 @@ namespace MODEL
         public string Extension { get; set; }
         public DateTime AddDate { get; set; }
         public int DownloadTimes { get; set; }
+        public Article Article { get; set; }
+
+        private Guid? tempID;
+        public Guid TempID
+        {
+            get
+            {
+                if (tempID == null) { tempID = Guid.NewGuid(); }
+                return tempID.Value;
+            }
+            set {
+                tempID = value;
+            }
+        }
     }
 }

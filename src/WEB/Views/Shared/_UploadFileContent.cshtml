@@ -1,30 +1,20 @@
 ﻿@model string
 <table>
-    <tr>
-        <td>Vivamus rutrum nibh in felis tristique vulputate</td>
-        <td class="action"><a href="#" class="view">View</a><a href="#" class="edit">Edit</a>
-            <a href="#" class="delete">Delete</a></td>
-    </tr>
-    <tr class="odd">
-        <td>Duis adipiscing lorem iaculis nunc</td>
-        <td class="action"><a href="#" class="view">View</a><a href="#" class="edit">Edit</a>
-            <a href="#" class="delete">Delete</a></td>
-    </tr>
-    <tr>
-        <td>Donec sit amet nisi ac magna varius tempus</td>
-        <td class="action"><a href="#" class="view">View</a><a href="#" class="edit">Edit</a>
-            <a href="#" class="delete">Delete</a></td>
-    </tr>
-    <tr class="odd">
-        <td>Duis ultricies laoreet felis</td>
-        <td class="action"><a href="#" class="view">View</a><a href="#" class="edit">Edit</a>
-            <a href="#" class="delete">Delete</a></td>
-    </tr>
-    <tr>
-        <td>Vivamus rutrum nibh in felis tristique vulputate</td>
-        <td class="action"><a href="#" class="view">View</a><a href="#" class="edit">Edit</a>
-            <a href="#" class="delete">Delete</a></td>
-    </tr>
+    @{
+        var items = Json.Decode<List<UploadFile>>(CookieHelper.Get(Model)) ?? new List<UploadFile>();
+        var isSingle = true;
+    }
+    @foreach (var file in items)
+    { 
+        <tr class="@(isSingle ? "" : "odd")">
+            <td>@(Uri.UnescapeDataString(file.FileName) + file.Extension)</td>
+            <td class="action"><a target="_blank" href="@Url.Content(file.Path)" class="view">下载
+            </a>
+                @Ajax.ActionLink("删除", "delete", "UploadFile", new { id = Model, fileID = file.TempID }, new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "Attachment", OnSuccess = "SetJqueryUI" }, new { @class = "delete" })
+            </td>
+        </tr>
+        isSingle = !isSingle;
+    }
 </table>
 <br />
 <input id="fileInput" name="fileInput" type="file" value="上传" />
@@ -39,7 +29,8 @@
             fileElementId: 'fileInput',
             dataType: 'text', //返回数据类型:text，xml，json，html,scritp,jsonp五种
             success: function (data) {
-                alert(data);
+                $('#Attachment').html(data);
+                SetJqueryUI();
             }
         })
     }

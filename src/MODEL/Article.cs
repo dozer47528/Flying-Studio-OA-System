@@ -19,6 +19,10 @@ namespace MODEL
                 if (tempID == null) { tempID = Guid.NewGuid(); }
                 return tempID.Value;
             }
+            set
+            {
+                tempID = value;
+            }
         }
         [Display(Name = "内容")]
         public string Content { get; set; }

@@ -18,6 +18,8 @@ namespace WEB.Controllers
         public ArticleService ArticleService { get; set; }
         [Inject]
         public UserRoleService UserRoleService { get; set; }
+        [Inject]
+        public UploadFileService UploadFileService { get; set; }
 
         public ActionResult Index(int? id)
         {
@@ -37,7 +39,8 @@ namespace WEB.Controllers
         [ValidateInput(false)]
         public ActionResult Create(Article article)
         {
-            ArticleService.Create(article, Request["userrole"]);
+            var saved = ArticleService.Create(article, Request["userrole"]);
+            UploadFileService.SaveArticleFile(saved);
             if (ModelState.IsValid)
             {
                 return RedirectFrom();
@@ -52,14 +55,18 @@ namespace WEB.Controllers
         public ActionResult Edit(int? id)
         {
             ConvertFromUrl();
+            var article = ArticleService.GetItemById(id ?? 0);
+            UploadFileService.InitArticleFiles(article.TempID.ToString(), article.ID);
             ViewBag.UserRole = UserRoleService.GetList();
-            return View(ArticleService.GetItemById(id ?? 0));
+            return View(article);
         }
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Edit(Article article)
         {
-            ArticleService.Edit(article, Request["userrole"]);
+            var saved = ArticleService.Edit(article, Request["userrole"]);
+            UploadFileService.SaveArticleFile(saved);
+
             if (ModelState.IsValid)
             {
                 return RedirectFrom();

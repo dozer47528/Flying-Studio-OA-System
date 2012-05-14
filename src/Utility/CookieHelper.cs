@@ -6,12 +6,13 @@ using System.Web;
 
 namespace Utility
 {
-    public static class Cookie
+    public static class CookieHelper
     {
         private const string COOKIE_PREFIX = "oa_";
 
 
         private static readonly TimeSpan EXCEED_TIME = new TimeSpan(30, 0, 0, 0, 0);
+        private static readonly TimeSpan EXCEED_TIME_Temp = new TimeSpan(1, 0, 0);
 
         private static HttpRequestBase Request
         {
@@ -30,17 +31,23 @@ namespace Utility
         public static void Post(string key, string value)
         {
             var cookie = new HttpCookie(COOKIE_PREFIX + key, value) { Expires = DateTime.Now + EXCEED_TIME };
-            Response.AppendCookie(cookie);
+            Response.Cookies.Set(cookie);
+        }
+        public static void PostTemp(string key, string value)
+        {
+            var cookie = new HttpCookie(COOKIE_PREFIX + key, value) { Expires = DateTime.Now + EXCEED_TIME_Temp };
+            Response.Cookies.Set(cookie);
         }
         public static string Get(string key)
         {
             try
             {
-                return Request.Cookies[COOKIE_PREFIX + key].Value;
+                return (Response.Cookies[COOKIE_PREFIX + key].Value ?? Request.Cookies[COOKIE_PREFIX + key].Value) ?? string.Empty;
             }
             catch
             {
-                return "";
+
+                return string.Empty;
             }
         }
     }

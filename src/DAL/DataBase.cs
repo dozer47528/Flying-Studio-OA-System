@@ -20,6 +20,7 @@ namespace DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Article>().Ignore(a => a.TempID);
+            modelBuilder.Entity<UploadFile>().Ignore(a => a.TempID);
             base.OnModelCreating(modelBuilder);
         }
     }
