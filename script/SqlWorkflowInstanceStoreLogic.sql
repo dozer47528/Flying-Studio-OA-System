@@ -1,3 +1,4 @@
+use [OA]
 set ansi_nulls on
 set quoted_identifier on
 set nocount on
