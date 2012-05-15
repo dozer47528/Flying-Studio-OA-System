@@ -1,0 +1,3 @@
+﻿//工作流持久化数据库创建脚本，请按照顺序运行
+SqlWorkflowInstanceStoreSchema.sql
+SqlWorkflowInstanceStoreLogic.sql

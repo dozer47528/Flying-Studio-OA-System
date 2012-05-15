@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MODEL", "src\MODEL\MODEL.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "src\Utility\Utility.csproj", "{DADD901A-DCBD-42B2-8CEB-A1E709638DB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WF", "src\WF\WF.csproj", "{54F6ACEB-E7F0-4E39-A9B2-468BF22D380F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{54B65B96-4EA4-438D-A125-46E660742ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54B65B96-4EA4-438D-A125-46E660742ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54B65B96-4EA4-438D-A125-46E660742ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54F6ACEB-E7F0-4E39-A9B2-468BF22D380F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F6ACEB-E7F0-4E39-A9B2-468BF22D380F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F6ACEB-E7F0-4E39-A9B2-468BF22D380F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F6ACEB-E7F0-4E39-A9B2-468BF22D380F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{77835E52-99F1-4F08-A892-1924AF63B630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{77835E52-99F1-4F08-A892-1924AF63B630}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77835E52-99F1-4F08-A892-1924AF63B630}.Release|Any CPU.ActiveCfg = Release|Any CPU

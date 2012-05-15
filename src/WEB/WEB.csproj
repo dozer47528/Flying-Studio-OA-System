@@ -484,6 +484,10 @@
       <Project>{dadd901a-dcbd-42b2-8ceb-a1e709638db3}</Project>
       <Name>Utility</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WF\WF.csproj">
+      <Project>{54f6aceb-e7f0-4e39-a9b2-468bf22d380f}</Project>
+      <Name>WF</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
