@@ -11,9 +11,6 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using BLL;
 using DAL;
-using Ninject;
-using Ninject.Web.Common;
-using WEB.Controllers;
 
 namespace WEB
 {

@@ -12,10 +12,8 @@ using Newtonsoft.Json;
 
 namespace BLL
 {
-    public class UploadFileService
+    public class UploadFileService : BaseService
     {
-        [Inject]
-        public OAContext db { get; set; }
 
         private HttpContextBase context;
         protected HttpContextBase Context
@@ -83,7 +81,7 @@ namespace BLL
                     var path = Path.Combine(FilePath, Path.GetFileName(tempPath));
                     File.Move(tempPath, path);
                     i.Path = string.Format("{0}/{1}", FileUrl, Path.GetFileName(tempPath));
-                    i.Article = article;
+                    i.Article = db.ArticleSet.Single(a => a.ID == article.ID);
                     db.UploadFileSet.Add(i);
                     db.SaveChanges();
                 }

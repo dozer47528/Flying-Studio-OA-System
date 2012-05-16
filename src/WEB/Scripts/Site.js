@@ -45,7 +45,8 @@ function UserRoleSelect() {
 }
 
 function SetJqueryUI() {
-    $("input,button").button();
+    $("input:checkbox,input:file,input:radio,input:submit,button").button();
+    $(".datepicker").datepicker();
 }
 
 function ConfirmDelete() {

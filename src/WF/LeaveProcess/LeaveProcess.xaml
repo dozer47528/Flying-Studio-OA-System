@@ -1,10 +1,14 @@
-﻿<Activity mc:Ignorable="sads sap" x:Class="WF.LeaveProcess" sap:VirtualizedContainerService.HintSize="724,927" mva:VisualBasic.Settings="Assembly references and imported namespaces for internal implementation"
+﻿<Activity mc:Ignorable="sads sap" x:Class="WF.LeaveProcess.LeaveProcess"
  xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities"
  xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
- xmlns:local="clr-namespace:WF"
+ xmlns:local="clr-namespace:WF.LeaveProcess"
+ xmlns:m="clr-namespace:MODEL;assembly=MODEL"
  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
  xmlns:mv="clr-namespace:Microsoft.VisualBasic;assembly=System"
  xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities"
+ xmlns:n="clr-namespace:Ninject;assembly=Ninject"
+ xmlns:nid="clr-namespace:Ninject.Infrastructure.Disposal;assembly=Ninject"
+ xmlns:ns="clr-namespace:Ninject.Syntax;assembly=Ninject"
  xmlns:s="clr-namespace:System;assembly=mscorlib"
  xmlns:s1="clr-namespace:System;assembly=System"
  xmlns:s2="clr-namespace:System;assembly=System.Xml"
@@ -22,7 +26,13 @@
  xmlns:sl="clr-namespace:System.Linq;assembly=System.Core"
  xmlns:st="clr-namespace:System.Text;assembly=mscorlib"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  <Flowchart DisplayName="请假流程" sad:XamlDebuggerXmlReader.FileName="E:\Documents\Visual Studio 11\Projects\_MyProject\Flying-Studio-OA-System\src\WF\LeaveProcess.xaml" sap:VirtualizedContainerService.HintSize="684,847">
+  <x:Members>
+    <x:Property Name="LeaveProcessModel" Type="InArgument(m:LeaveProcess)" />
+    <x:Property Name="User" Type="InArgument(m:User)" />
+  </x:Members>
+  <sap:VirtualizedContainerService.HintSize>724,927</sap:VirtualizedContainerService.HintSize>
+  <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
+  <Flowchart DisplayName="请假流程" sad:XamlDebuggerXmlReader.FileName="E:\Documents\Visual Studio 11\Projects\_MyProject\Flying-Studio-OA-System\src\WF\LeaveProcess\LeaveProcess.xaml" sap:VirtualizedContainerService.HintSize="684,847">
     <Flowchart.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="NeedTeamLeader" />
       <Variable x:TypeArguments="x:Boolean" Name="Agree" />
@@ -34,13 +44,13 @@
         <av:Size x:Key="ShapeSize">60,75</av:Size>
         <x:Double x:Key="Height">810.67333333333318</x:Double>
         <x:Double x:Key="Width">670</x:Double>
-        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,129</av:PointCollection>
+        <av:PointCollection x:Key="ConnectorLocation">300,77.5 300,119</av:PointCollection>
       </scg3:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <Flowchart.StartNode>
       <x:Reference>__ReferenceID7</x:Reference>
     </Flowchart.StartNode>
-    <FlowDecision x:Name="__ReferenceID4" Condition="[NeedTeamLeader]" sap:VirtualizedContainerService.HintSize="70,87">
+    <FlowDecision x:Name="__ReferenceID6" Condition="[NeedTeamLeader]" sap:VirtualizedContainerService.HintSize="70,87">
       <sap:WorkflowViewStateService.ViewState>
         <scg3:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -48,26 +58,26 @@
           <av:Size x:Key="ShapeSize">70,87</av:Size>
           <x:String x:Key="TrueLabel">是否经常请假或者是组长</x:String>
           <x:String x:Key="FalseLabel">不是否经常请假并且不是组长</x:String>
-          <av:PointCollection x:Key="TrueConnector">265,254.5 170,254.5 170,360 200,360</av:PointCollection>
-          <av:PointCollection x:Key="FalseConnector">335,254.5 430,254.5 430,580 400,580</av:PointCollection>
+          <av:PointCollection x:Key="TrueConnector">265,254.5 170,254.5 170,340 200,340</av:PointCollection>
+          <av:PointCollection x:Key="FalseConnector">335,254.5 430,254.5 430,570 400,570</av:PointCollection>
         </scg3:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <FlowDecision.True>
         <FlowStep x:Name="__ReferenceID5">
           <sap:WorkflowViewStateService.ViewState>
             <scg3:Dictionary x:TypeArguments="x:String, x:Object">
-              <av:Point x:Key="ShapeLocation">200,349</av:Point>
+              <av:Point x:Key="ShapeLocation">200,329</av:Point>
               <av:Size x:Key="ShapeSize">200,22</av:Size>
-              <av:PointCollection x:Key="ConnectorLocation">300,371 300,416.5</av:PointCollection>
+              <av:PointCollection x:Key="ConnectorLocation">300,351 300,416.5</av:PointCollection>
             </scg3:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <local:LeaveProcess_TeamLeader Agree="[Agree]" DisplayName="站长审批" sap:VirtualizedContainerService.HintSize="200,22">
+          <local:Process Agree="[Agree]" DisplayName="站长审批" sap:VirtualizedContainerService.HintSize="200,22" Model="[LeaveProcessModel]" Role="执行站长" User="[User]">
             <sap:WorkflowViewStateService.ViewState>
               <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg3:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-          </local:LeaveProcess_TeamLeader>
+          </local:Process>
           <FlowStep.Next>
             <FlowDecision x:Name="__ReferenceID3" Condition="[Agree]" sap:VirtualizedContainerService.HintSize="70,87">
               <sap:WorkflowViewStateService.ViewState>
@@ -77,7 +87,7 @@
                   <av:Size x:Key="ShapeSize">70,87</av:Size>
                   <x:String x:Key="TrueLabel">同意</x:String>
                   <x:String x:Key="FalseLabel">不同意</x:String>
-                  <av:PointCollection x:Key="TrueConnector">265,460 170,460 170,580 200,580</av:PointCollection>
+                  <av:PointCollection x:Key="TrueConnector">265,460 170,460 170,570 200,570</av:PointCollection>
                   <av:PointCollection x:Key="FalseConnector">335,460 460,460 460,740</av:PointCollection>
                 </scg3:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
@@ -85,18 +95,18 @@
                 <FlowStep x:Name="__ReferenceID1">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg3:Dictionary x:TypeArguments="x:String, x:Object">
-                      <av:Point x:Key="ShapeLocation">200,569</av:Point>
+                      <av:Point x:Key="ShapeLocation">200,559</av:Point>
                       <av:Size x:Key="ShapeSize">200,22</av:Size>
-                      <av:PointCollection x:Key="ConnectorLocation">300,591 300,636.5</av:PointCollection>
+                      <av:PointCollection x:Key="ConnectorLocation">300,581 300,636.5</av:PointCollection>
                     </scg3:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <local:LeaveProcess_GroupLeader Agree="[Agree]" DisplayName="组长审批" sap:VirtualizedContainerService.HintSize="200,22">
+                  <local:Process Agree="[Agree]" DisplayName="组长审批" sap:VirtualizedContainerService.HintSize="200,22" Model="[LeaveProcessModel]" Role="组长" User="[User]">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg3:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                  </local:LeaveProcess_GroupLeader>
+                  </local:Process>
                   <FlowStep.Next>
                     <FlowDecision x:Name="__ReferenceID2" Condition="[Agree]" sap:VirtualizedContainerService.HintSize="70,87">
                       <sap:WorkflowViewStateService.ViewState>
@@ -111,20 +121,20 @@
                         </scg3:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                       <FlowDecision.True>
-                        <FlowStep x:Name="__ReferenceID6">
+                        <FlowStep x:Name="__ReferenceID4">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                               <av:Point x:Key="ShapeLocation">40,739</av:Point>
                               <av:Size x:Key="ShapeSize">200,22</av:Size>
                             </scg3:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <local:LeaveProcess_Agree sap:VirtualizedContainerService.HintSize="200,22">
+                          <local:Agree DisplayName="同意" sap:VirtualizedContainerService.HintSize="200,22" Model="[LeaveProcessModel]">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg3:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                          </local:LeaveProcess_Agree>
+                          </local:Agree>
                         </FlowStep>
                       </FlowDecision.True>
                       <FlowDecision.False>
@@ -135,13 +145,13 @@
                               <av:Size x:Key="ShapeSize">200,22</av:Size>
                             </scg3:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <local:LeaveProcess_Disagree sap:VirtualizedContainerService.HintSize="200,22">
+                          <local:Disagree DisplayName="不同意" sap:VirtualizedContainerService.HintSize="200,22" Model="[LeaveProcessModel]">
                             <sap:WorkflowViewStateService.ViewState>
                               <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                               </scg3:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                          </local:LeaveProcess_Disagree>
+                          </local:Disagree>
                         </FlowStep>
                       </FlowDecision.False>
                     </FlowDecision>
@@ -161,28 +171,28 @@
     </FlowDecision>
     <x:Reference>__ReferenceID2</x:Reference>
     <x:Reference>__ReferenceID3</x:Reference>
+    <x:Reference>__ReferenceID4</x:Reference>
+    <x:Reference>__ReferenceID0</x:Reference>
+    <x:Reference>__ReferenceID5</x:Reference>
+    <x:Reference>__ReferenceID1</x:Reference>
     <FlowStep x:Name="__ReferenceID7">
       <sap:WorkflowViewStateService.ViewState>
         <scg3:Dictionary x:TypeArguments="x:String, x:Object">
-          <av:Point x:Key="ShapeLocation">200,129</av:Point>
+          <av:Point x:Key="ShapeLocation">200,119</av:Point>
           <av:Size x:Key="ShapeSize">200,22</av:Size>
-          <av:PointCollection x:Key="ConnectorLocation">300,151 300,211</av:PointCollection>
+          <av:PointCollection x:Key="ConnectorLocation">300,141 300,211</av:PointCollection>
         </scg3:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <local:LeaveProcess_Apply DisplayName="提交申请" sap:VirtualizedContainerService.HintSize="200,22" NeedTeamLeader="[NeedTeamLeader]">
+      <local:Apply DisplayName="申请" sap:VirtualizedContainerService.HintSize="200,22" Model="[LeaveProcessModel]" NeedTeamLeader="[NeedTeamLeader]">
         <sap:WorkflowViewStateService.ViewState>
           <scg3:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg3:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-      </local:LeaveProcess_Apply>
+      </local:Apply>
       <FlowStep.Next>
-        <x:Reference>__ReferenceID4</x:Reference>
+        <x:Reference>__ReferenceID6</x:Reference>
       </FlowStep.Next>
     </FlowStep>
-    <x:Reference>__ReferenceID5</x:Reference>
-    <x:Reference>__ReferenceID1</x:Reference>
-    <x:Reference>__ReferenceID6</x:Reference>
-    <x:Reference>__ReferenceID0</x:Reference>
   </Flowchart>
 </Activity>

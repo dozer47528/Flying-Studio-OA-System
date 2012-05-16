@@ -1,0 +1,44 @@
+﻿@model MODEL.LeaveProcess
+@{
+    ViewBag.Title = "新增请假流程 | 工作流平台 | 办公OA系统";
+    Layout = "~/Views/Process/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("所有任务", "Index", "Process") &raquo;
+    @Html.ActionLink("新增请假流程", "Create", "Process", new { @class = "active" })
+    @if (!string.IsNullOrEmpty(Request["from"]))
+    {
+        @Html.Raw(" &raquo; ")
+        <a href="@Uri.UnescapeDataString(Request["from"])">返回来源页面</a>
+    }
+</h2>
+<div id="main">
+    <br />
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <p>
+                @Html.LabelFor(m => m.Memo)
+                <br />
+                <br />
+                @Html.TextAreaFor(m => m.Memo, new { @class = "textarea" })
+            </p>
+            <p>
+                @Html.LabelFor(m => m.StartDate)
+                <br />
+                <br />
+                @Html.TextBoxFor(m => m.StartDate, new { @class = "datepicker text-medium" })
+                @Html.ValidationMessageFor(m => m.StartDate)
+            </p>
+            <p>
+                @Html.LabelFor(m => m.EndDate)
+                <br />
+                <br />
+                @Html.TextBoxFor(m => m.EndDate, new { @class = "datepicker text-medium" })
+                @Html.ValidationMessageFor(m => m.EndDate)
+            </p>
+        </fieldset>
+        
+        <input type="submit" value="保存" />
+    }
+</div>

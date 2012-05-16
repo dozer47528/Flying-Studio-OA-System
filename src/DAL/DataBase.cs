@@ -16,11 +16,13 @@ namespace DAL
         public DbSet<UploadFile> UploadFileSet { get; set; }
         public DbSet<UserRole> UserRoleSet { get; set; }
         public DbSet<Inbox> InboxSet { get; set; }
+        public DbSet<LeaveProcess> LeaveProcessSet { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Article>().Ignore(a => a.TempID);
             modelBuilder.Entity<UploadFile>().Ignore(a => a.TempID);
+            modelBuilder.Entity<LeaveProcess>().Ignore(a => a.ProcessName);
             base.OnModelCreating(modelBuilder);
         }
     }
@@ -62,6 +64,8 @@ namespace DAL
         public static void InitTestData(this OAContext db)
         {
             var role = db.UserRoleSet.First(u => u.RoleEnum == (int)UserRoleEnum.执行站长);
+            var role1 = db.UserRoleSet.First(u => u.RoleEnum == (int)UserRoleEnum.办公组组长);
+            var role2 = db.UserRoleSet.First(u => u.RoleEnum == (int)UserRoleEnum.办公组成员);
             var user = new User
             {
                 NickName = "Dozer",
@@ -75,7 +79,37 @@ namespace DAL
                 Role = role,
                 Username = "dozer47528",
             };
+
+            var user1 = new User
+            {
+                NickName = "简小波",
+                FirstName = "简小波",
+                LastName = "简小波",
+                Email = "mail@dozer.cc",
+                FirstLoginDate = DateTime.Now,
+                LastLoginDate = DateTime.Now,
+                LoginTimes = 0,
+                Password = "dozer36937".MD5(),
+                Role = role1,
+                Username = "dozer47528",
+            };
+
+            var user2 = new User
+            {
+                NickName = "汪洋",
+                FirstName = "汪洋",
+                LastName = "汪洋",
+                Email = "mail@dozer.cc",
+                FirstLoginDate = DateTime.Now,
+                LastLoginDate = DateTime.Now,
+                LoginTimes = 0,
+                Password = "dozer36937".MD5(),
+                Role = role2,
+                Username = "dozer47528",
+            };
             db.UserSet.Add(user);
+            db.UserSet.Add(user1);
+            db.UserSet.Add(user2);
 
 
             for (var k = 0; k < 100; k++)

@@ -5,21 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using MODEL;
-using Ninject;
-using Utility;
 
 namespace WEB.Controllers
 {
     public class InformationController : BaseController
     {
-        [Inject]
-        public InboxService InboxService { get; set; }
-        [Inject]
-        public ArticleService ArticleService { get; set; }
-        [Inject]
-        public UserRoleService UserRoleService { get; set; }
-        [Inject]
-        public UploadFileService UploadFileService { get; set; }
 
         public ActionResult Index(int? id)
         {

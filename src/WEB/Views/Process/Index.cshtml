@@ -1,0 +1,25 @@
+﻿@model List<MODEL.BaseProcess>
+@{
+    ViewBag.Title = "所有任务 | 工作流平台 | 办公OA系统";
+    Layout = "~/Views/Process/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("所有任务", "Index", "Process") &raquo; </h2>
+<div id="main">
+    <br />
+    <div id="ajaxContent">
+        <table>
+            @{bool line = true;}
+            @foreach (var process in Model)
+            { 
+                <tr class="@string.Format(line ? "odd" : "")">
+                    <td>@string.Format("{0}[申请人：{1}]", process.ProcessName, process.Owner.NickName)</td>
+                    <td class="action"><a href="@Url.Action("ProcessLeaveProcess", new { id = process.ID })" class="view">
+                        处理</a></td>
+                </tr>
+                line = !line;
+            }
+        </table>
+    </div>
+</div>
+<!-- // #main -->

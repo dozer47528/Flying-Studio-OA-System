@@ -9,10 +9,9 @@ using Webdiyer.WebControls.Mvc;
 using Utility;
 namespace BLL
 {
-    public class ArticleService
+    public class ArticleService : BaseService
     {
-        [Inject]
-        public OAContext db { get; set; }
+
         public Article GetItemById(int id)
         {
             return db.ArticleSet.Single(a => a.ID == id);

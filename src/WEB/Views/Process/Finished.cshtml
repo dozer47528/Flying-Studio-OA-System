@@ -1,0 +1,25 @@
+﻿@model List<MODEL.BaseProcess>
+@{
+    ViewBag.Title = "已完成的流程 | 工作流平台 | 办公OA系统";
+    Layout = "~/Views/Process/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("已完成的流程", "Finished", "Process") &raquo; </h2>
+<div id="main">
+    <br />
+    <div id="ajaxContent">
+        <table>
+            @{bool line = true;}
+            @foreach (var process in Model)
+            { 
+                <tr class="@string.Format(line ? "odd" : "")">
+                    <td>@string.Format("{0}[申请人：{1}][是否通过：{2}]", process.ProcessName, process.Owner.NickName,process.Passed?"是":"否")</td>
+                    <td class="action"><a href="@Url.Action("ProcessLeaveProcess", new { id = process.ID })" class="view">
+                        处理</a></td>
+                </tr>
+                line = !line;
+            }
+        </table>
+    </div>
+</div>
+<!-- // #main -->

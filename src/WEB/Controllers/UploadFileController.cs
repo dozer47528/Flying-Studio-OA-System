@@ -4,14 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
-using Ninject;
 
 namespace WEB.Controllers
 {
-    public class UploadFileController : Controller
+    public class UploadFileController : BaseController
     {
-        [Inject]
-        public UploadFileService UploadFileService { get; set; }
 
         [HttpPost]
         public ActionResult Upload(string id)

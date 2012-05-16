@@ -27,22 +27,27 @@ namespace Utility
         public static void Delete(string key)
         {
             Response.Cookies.Remove(key);
+            Request.Cookies.Remove(key);
         }
         public static void Post(string key, string value)
         {
             var cookie = new HttpCookie(COOKIE_PREFIX + key, value) { Expires = DateTime.Now + EXCEED_TIME };
             Response.Cookies.Set(cookie);
+            Request.Cookies.Set(cookie);
         }
         public static void PostTemp(string key, string value)
         {
             var cookie = new HttpCookie(COOKIE_PREFIX + key, value) { Expires = DateTime.Now + EXCEED_TIME_Temp };
             Response.Cookies.Set(cookie);
+            Request.Cookies.Set(cookie);
         }
         public static string Get(string key)
         {
             try
             {
-                return (Response.Cookies[COOKIE_PREFIX + key].Value ?? Request.Cookies[COOKIE_PREFIX + key].Value) ?? string.Empty;
+                var req = Request.Cookies[COOKIE_PREFIX + key].Value;
+                if (!string.IsNullOrEmpty(req)) return req;
+                return string.Empty;
             }
             catch
             {

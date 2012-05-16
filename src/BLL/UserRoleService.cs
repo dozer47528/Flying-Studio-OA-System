@@ -10,10 +10,8 @@ using Webdiyer.WebControls.Mvc;
 
 namespace BLL
 {
-    public class UserRoleService
+    public class UserRoleService : BaseService
     {
-        [Inject]
-        public OAContext db { get; set; }
 
         public List<UserRole> GetList()
         {
