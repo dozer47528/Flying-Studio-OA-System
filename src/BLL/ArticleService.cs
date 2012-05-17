@@ -32,7 +32,6 @@ namespace BLL
         {
             article.Authority = string.IsNullOrEmpty(autority) ? 0 : AuthorityHelper.GetAuthority(autority.Split(','));
             article.AddDate = DateTime.Now;
-            //article.Owner
             db.ArticleSet.Add(article);
             db.SaveChanges();
             return article;

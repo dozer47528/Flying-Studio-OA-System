@@ -9,7 +9,7 @@ namespace MODEL
     public class UserRole
     {
         public int ID { get; set; }
-        public virtual UserRole FatherRole { get; set; }//上级角色
+        public UserRole FatherRole { get; set; }//上级角色
         public string Name { get; set; }//角色名
         public int RoleEnum { get; set; }//角色枚举
         public string Describe { get; set; }//描述

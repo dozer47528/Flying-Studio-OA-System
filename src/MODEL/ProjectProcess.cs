@@ -7,18 +7,22 @@ namespace MODEL
 {
     public class ProjectProcess : BaseProcess
     {
+        public ProjectProcess()
+        {
+            ProcessName = "项目流程";
+        }
         public string Memo { get; set; }
         public string File1 { get; set; }
         public string File2 { get; set; }
         public string ActivityName { get; set; }
-        public virtual List<AppraisalResult> AppraisalResult { get; set; }
+        public ICollection<AppraisalResult> AppraisalResult { get; set; }
     }
 
     public class AppraisalResult
     {
         public int ID { get; set; }
         public int ProcessID { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
         public bool IsAgree { get; set; }
     }
 

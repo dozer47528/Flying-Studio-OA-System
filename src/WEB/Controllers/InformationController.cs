@@ -29,6 +29,8 @@ namespace WEB.Controllers
         [ValidateInput(false)]
         public ActionResult Create(Article article)
         {
+            var user = UserService.GetUserByCookie();
+            article.Owner = user;
             var saved = ArticleService.Create(article, Request["userrole"]);
             UploadFileService.SaveArticleFile(saved);
             if (ModelState.IsValid)

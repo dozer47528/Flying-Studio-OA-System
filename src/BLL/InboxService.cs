@@ -11,5 +11,6 @@ namespace BLL
     public class InboxService : BaseService
     {
 
+
     }
 }

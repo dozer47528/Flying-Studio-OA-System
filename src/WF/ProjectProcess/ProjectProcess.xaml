@@ -27,7 +27,7 @@
   </x:Members>
   <sap:VirtualizedContainerService.HintSize>654,982</sap:VirtualizedContainerService.HintSize>
   <mva:VisualBasic.Settings>Assembly references and imported namespaces for internal implementation</mva:VisualBasic.Settings>
-  <Flowchart sad:XamlDebuggerXmlReader.FileName="E:\Documents\Visual Studio 11\Projects\_MyProject\Flying-Studio-OA-System\src\WF\ProjectProcess\ProjectProcess.xaml" sap:VirtualizedContainerService.HintSize="614,902">
+  <Flowchart DisplayName="项目流程" sad:XamlDebuggerXmlReader.FileName="E:\Documents\Visual Studio 11\Projects\_MyProject\Flying-Studio-OA-System\src\WF\ProjectProcess\ProjectProcess.xaml" sap:VirtualizedContainerService.HintSize="614,902">
     <Flowchart.Variables>
       <Variable x:TypeArguments="x:Int32" Name="AppraisalResult" />
       <Variable x:TypeArguments="x:Boolean" Name="DesigningReviewResult" />
@@ -53,7 +53,7 @@
           <av:PointCollection x:Key="ConnectorLocation">300,141 300,166.5</av:PointCollection>
         </scg3:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <local:Appraisal DisplayName="可行性评估" sap:VirtualizedContainerService.HintSize="200,22" Rusult="[AppraisalResult]">
+      <local:Appraisal DisplayName="可行性评估" sap:VirtualizedContainerService.HintSize="200,22" ID="[ProjectID]" Rusult="[AppraisalResult]">
         <sap:WorkflowViewStateService.ViewState>
           <scg3:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>

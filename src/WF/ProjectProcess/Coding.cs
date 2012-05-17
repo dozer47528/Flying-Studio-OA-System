@@ -4,16 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Activities;
 using MODEL;
+using BLL;
 
 namespace WF.ProjectProcess
 {
 
     public sealed class Coding : NativeActivity
     {
+        [RequiredArgument]
+        public InArgument<int> ID { get; set; }
+        private ProjectProcessService ProjectProcessService = new ProjectProcessService();
         protected override void Execute(NativeActivityContext context)
         {
-            //通知
-            context.CreateBookmark(UserRoleEnum.技术组成员.ToString(), new BookmarkCallback(this.Continue));
+            var id = ID.Get(context);
+            var bookmark = UserRoleEnum.技术组成员.ToString();
+            ProjectProcessService.SetBookmark(id, bookmark);
+
+
+            //通知所有用户
+
+
+            context.CreateBookmark(bookmark, new BookmarkCallback(this.Continue));
         }
 
         private void Continue(NativeActivityContext context, Bookmark bookmark, object obj)

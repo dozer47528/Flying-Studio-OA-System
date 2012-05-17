@@ -11,10 +11,6 @@ namespace BLL
         public const string USER_ID_NAME = "user_id";
         public User GetUserByCookie()
         {
-            //CookieHelper.Post(USER_ID_NAME, "3");
-            //CookieHelper.Post(USER_ID_NAME + "22", "3");
-
-
             var id = int.Parse(CookieHelper.Get(USER_ID_NAME));
             return db.UserSet.Single(u => u.ID == id);
         }

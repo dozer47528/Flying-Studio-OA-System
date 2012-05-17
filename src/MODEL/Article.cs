@@ -28,9 +28,9 @@ namespace MODEL
         public string Content { get; set; }
         public DateTime AddDate { get; set; }
         public bool IsDelete { get; set; }
-        public virtual User Owner { get; set; }
+        public User Owner { get; set; }
         [Display(Name = "权限")]
         public int Authority { get; set; }
-        public virtual List<UploadFile> Attachment { get; set; }
+        public ICollection<UploadFile> Attachment { get; set; }
     }
 }

@@ -12,7 +12,7 @@ namespace MODEL
         public string FileName { get; set; }
         public string Extension { get; set; }
         public DateTime AddDate { get; set; }
-        public virtual Article Article { get; set; }
+        public Article Article { get; set; }
 
         private Guid? tempID;
         public Guid TempID
