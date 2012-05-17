@@ -52,6 +52,13 @@
   <ItemGroup>
     <Compile Include="LeaveProcess\Apply.cs" />
     <Compile Include="LeaveProcess\Process.cs" />
+    <Compile Include="ProjectProcess\Appraisal.cs" />
+    <Compile Include="ProjectProcess\Designing.cs" />
+    <Compile Include="ProjectProcess\DesigningReview.cs" />
+    <Compile Include="ProjectProcess\Coding.cs" />
+    <Compile Include="ProjectProcess\CodingReview.cs" />
+    <Compile Include="ProjectProcess\End.cs" />
+    <Compile Include="ProjectProcess\Finish.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LeaveProcess\Agree.cs" />
     <Compile Include="LeaveProcess\Disagree.cs" />
@@ -77,6 +84,12 @@
   </ItemGroup>
   <ItemGroup>
     <XamlAppDef Include="LeaveProcess\LeaveProcess.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </XamlAppDef>
+  </ItemGroup>
+  <ItemGroup>
+    <XamlAppDef Include="ProjectProcess\ProjectProcess.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </XamlAppDef>

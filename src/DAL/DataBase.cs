@@ -17,6 +17,8 @@ namespace DAL
         public DbSet<UserRole> UserRoleSet { get; set; }
         public DbSet<Inbox> InboxSet { get; set; }
         public DbSet<LeaveProcess> LeaveProcessSet { get; set; }
+        public DbSet<ProjectProcess> ProjectProcessSet { get; set; }
+        public DbSet<AppraisalResult> AppraisalResultSet { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

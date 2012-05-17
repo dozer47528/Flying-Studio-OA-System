@@ -183,7 +183,7 @@
           <av:PointCollection x:Key="ConnectorLocation">300,141 300,211</av:PointCollection>
         </scg3:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <local:Apply DisplayName="申请" sap:VirtualizedContainerService.HintSize="200,22" Model="[LeaveProcessModel]" NeedTeamLeader="[NeedTeamLeader]">
+      <local:Apply DisplayName="申请" sap:VirtualizedContainerService.HintSize="200,22" Model="[LeaveProcessModel]" NeedTeamLeader="[NeedTeamLeader]" User="[User]">
         <sap:WorkflowViewStateService.ViewState>
           <scg3:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>

@@ -12,6 +12,7 @@ namespace WF.LeaveProcess
     {
         public OutArgument<bool> NeedTeamLeader { get; set; }
         public InOutArgument<MODEL.LeaveProcess> Model { get; set; }
+        public InOutArgument<MODEL.User> User { get; set; }
         protected LeaveProcessService LeaveProcessService = new LeaveProcessService();
 
         protected override void Execute(CodeActivityContext context)
@@ -19,7 +20,7 @@ namespace WF.LeaveProcess
             var result = false;
             var model = Model.Get(context);
             if ((model.EndDate.Value - model.StartDate.Value).TotalDays > 7) { result = true; }
-
+            if (LeaveProcessService.GetThisMonthTimes(User.Get(context)) > 5) { result = true; }
 
             NeedTeamLeader.Set(context, result);
         }

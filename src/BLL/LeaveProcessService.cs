@@ -49,5 +49,28 @@ namespace BLL
                     select l;
             return q.ToList();
         }
+
+        /// <summary>
+        /// 得到这个月的请假天数
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public int GetThisMonthTimes(User user)
+        {
+            var thisMonth = DateTime.Now.Date.AddDays(-DateTime.Now.Day);
+            var list = db.LeaveProcessSet.Where(l =>
+                l.Owner.ID == user.ID &&
+                l.Finished == true &&
+                l.Passed == true &&
+                l.StartDate.Value >= thisMonth //当月的请假申请
+                ).ToList();
+            var result = 0;
+            foreach (var l in list)
+            {
+                result += (int)(l.EndDate.Value - l.StartDate.Value).TotalDays + 1;
+            }
+
+            return result;
+        }
     }
 }

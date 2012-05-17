@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="Article.cs" />
     <Compile Include="BaseProcess.cs" />
+    <Compile Include="CheckIn.cs" />
     <Compile Include="Inbox.cs" />
     <Compile Include="LeaveProcess.cs" />
     <Compile Include="ModelException.cs" />
+    <Compile Include="ProjectProcess.cs" />
     <Compile Include="UploadFile.cs" />
     <Compile Include="UserRole.cs" />
     <Compile Include="User.cs" />
