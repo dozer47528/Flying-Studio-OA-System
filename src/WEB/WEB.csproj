@@ -527,6 +527,15 @@
   <ItemGroup>
     <Content Include="Views\Process\Finished.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Process\CreateProjectProcess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Process\AppraisalProjectProcess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Process\ProcessProjectProcess.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

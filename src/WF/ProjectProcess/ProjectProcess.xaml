@@ -67,7 +67,7 @@
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <av:Point x:Key="ShapeLocation">265,166.5</av:Point>
               <av:Size x:Key="ShapeSize">70,87</av:Size>
-              <av:PointCollection x:Key="1Connector">300,253.5 300,289</av:PointCollection>
+              <av:PointCollection x:Key="1Connector">300,253.5 300,299</av:PointCollection>
               <av:PointCollection x:Key="Default">335,210 430,210 430,130 400,130</av:PointCollection>
               <av:PointCollection x:Key="-1Connector">265,210 200,210</av:PointCollection>
             </scg3:Dictionary>
@@ -75,12 +75,12 @@
           <FlowStep x:Key="1" x:Name="__ReferenceID1">
             <sap:WorkflowViewStateService.ViewState>
               <scg3:Dictionary x:TypeArguments="x:String, x:Object">
-                <av:Point x:Key="ShapeLocation">200,289</av:Point>
+                <av:Point x:Key="ShapeLocation">200,299</av:Point>
                 <av:Size x:Key="ShapeSize">200,22</av:Size>
-                <av:PointCollection x:Key="ConnectorLocation">300,311 300,360</av:PointCollection>
+                <av:PointCollection x:Key="ConnectorLocation">300,321 300,360</av:PointCollection>
               </scg3:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <local:Designing DisplayName="通知运营组出交互设计" sap:VirtualizedContainerService.HintSize="200,22">
+            <local:Designing DisplayName="通知运营组出交互设计" sap:VirtualizedContainerService.HintSize="200,22" ID="[ProjectID]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -96,7 +96,7 @@
                     <av:PointCollection x:Key="ConnectorLocation">300,382 300,426.5</av:PointCollection>
                   </scg3:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <local:DesigningReview DisplayName="运营组组长评审" sap:VirtualizedContainerService.HintSize="200,22" Rusult="[DesigningReviewResult]">
+                <local:DesigningReview DisplayName="运营组组长评审" sap:VirtualizedContainerService.HintSize="200,22" ID="[ProjectID]" Rusult="[DesigningReviewResult]">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -112,7 +112,7 @@
                         <av:Size x:Key="ShapeSize">70,87</av:Size>
                         <x:String x:Key="TrueLabel">通过</x:String>
                         <x:String x:Key="FalseLabel">重做</x:String>
-                        <av:PointCollection x:Key="FalseConnector">335,470 430,470 430,300 400,300</av:PointCollection>
+                        <av:PointCollection x:Key="FalseConnector">335,470 430,470 430,310 400,310</av:PointCollection>
                         <av:PointCollection x:Key="TrueConnector">265,470 240,470 240,540 300,540 300,570</av:PointCollection>
                       </scg3:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
@@ -125,7 +125,7 @@
                             <av:PointCollection x:Key="ConnectorLocation">300,592 300,640</av:PointCollection>
                           </scg3:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
-                        <local:Coding DisplayName="通知技术组开始做网站" sap:VirtualizedContainerService.HintSize="200,22">
+                        <local:Coding DisplayName="通知技术组开始做网站" sap:VirtualizedContainerService.HintSize="200,22" ID="[ProjectID]">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -141,7 +141,7 @@
                                 <av:PointCollection x:Key="ConnectorLocation">300,662 300,696.5</av:PointCollection>
                               </scg3:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
-                            <local:CodingReview DisplayName="技术组组长评审" sap:VirtualizedContainerService.HintSize="200,22" Rusult="[CodingReviewResult]">
+                            <local:CodingReview DisplayName="技术组组长评审" sap:VirtualizedContainerService.HintSize="200,22" ID="[ProjectID]" Rusult="[CodingReviewResult]">
                               <sap:WorkflowViewStateService.ViewState>
                                 <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -169,7 +169,7 @@
                                         <av:Size x:Key="ShapeSize">200,22</av:Size>
                                       </scg3:Dictionary>
                                     </sap:WorkflowViewStateService.ViewState>
-                                    <local:Finish DisplayName="完成" sap:VirtualizedContainerService.HintSize="200,22">
+                                    <local:Finish DisplayName="完成" sap:VirtualizedContainerService.HintSize="200,22" ID="[ProjectID]">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -202,7 +202,7 @@
                 <av:Size x:Key="ShapeSize">200,22</av:Size>
               </scg3:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <local:End DisplayName="不通过" sap:VirtualizedContainerService.HintSize="200,22">
+            <local:End DisplayName="不通过" sap:VirtualizedContainerService.HintSize="200,22" ID="[ProjectID]">
               <sap:WorkflowViewStateService.ViewState>
                 <scg3:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>

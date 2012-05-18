@@ -15,6 +15,7 @@ namespace BLL
     public class UploadFileService : BaseService
     {
 
+        public UploadFileService(OAContext db) : base(db) { }
         private HttpContextBase context;
         protected HttpContextBase Context
         {
@@ -63,7 +64,7 @@ namespace BLL
 
         public void InitArticleFiles(string guid, int id)
         {
-            var saved = db.UploadFileSet.Where(f => f.Article.ID == id).ToList();
+            var saved = db.UploadFiles.Where(f => f.Article.ID == id).ToList();
             saved.ForEach(f => f.Article = null);//可以优化
             CookieHelper.PostTemp(guid, JsonConvert.SerializeObject(saved));
         }
@@ -71,7 +72,7 @@ namespace BLL
         public void SaveArticleFile(Article article)
         {
             var items = JsonConvert.DeserializeObject<List<UploadFile>>(CookieHelper.Get(article.TempID.ToString())) ?? new List<UploadFile>();
-            var saved = db.UploadFileSet.Where(f => f.Article.ID == article.ID).ToList();
+            var saved = db.UploadFiles.Where(f => f.Article.ID == article.ID).ToList();
 
             foreach (var i in items)
             {
@@ -81,8 +82,8 @@ namespace BLL
                     var path = Path.Combine(FilePath, Path.GetFileName(tempPath));
                     File.Move(tempPath, path);
                     i.Path = string.Format("{0}/{1}", FileUrl, Path.GetFileName(tempPath));
-                    i.Article = db.ArticleSet.Single(a => a.ID == article.ID);
-                    db.UploadFileSet.Add(i);
+                    i.Article = db.Articles.Single(a => a.ID == article.ID);
+                    db.UploadFiles.Add(i);
                     db.SaveChanges();
                 }
             }
@@ -91,10 +92,10 @@ namespace BLL
                 if (!items.Any(i => i.ID == s.ID))
                 {
                     var fullPath = Context.Server.MapPath(s.Path);
-                    var item = db.UploadFileSet.FirstOrDefault(f => f.ID == s.ID);
+                    var item = db.UploadFiles.FirstOrDefault(f => f.ID == s.ID);
                     if (item != null)
                     {
-                        db.UploadFileSet.Remove(item);
+                        db.UploadFiles.Remove(item);
                         db.SaveChanges();
                     }
                     if (File.Exists(fullPath))

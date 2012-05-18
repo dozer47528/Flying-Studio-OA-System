@@ -8,14 +8,13 @@ using MODEL;
 namespace WF.LeaveProcess
 {
 
-    public class Apply : CodeActivity
+    public class Apply : BaseActivity
     {
         public OutArgument<bool> NeedTeamLeader { get; set; }
         public InOutArgument<MODEL.LeaveProcess> Model { get; set; }
         public InOutArgument<MODEL.User> User { get; set; }
-        protected LeaveProcessService LeaveProcessService = new LeaveProcessService();
 
-        protected override void Execute(CodeActivityContext context)
+        protected override void Execute(NativeActivityContext context)
         {
             var result = false;
             var model = Model.Get(context);

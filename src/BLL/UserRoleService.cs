@@ -12,10 +12,11 @@ namespace BLL
 {
     public class UserRoleService : BaseService
     {
+        public UserRoleService(OAContext db) : base(db) { }
 
         public List<UserRole> GetList()
         {
-            return db.UserRoleSet.ToList();
+            return db.UserRoles.ToList();
         }
     }
 }

@@ -14,18 +14,19 @@
 </h2>
 <div id="main">
     <br />
-    @using (Html.BeginForm("PostLeaveProcess", "Process", new { id = Model.ID }))
+    @using (Html.BeginForm())
     {
         <fieldset>
-            <h3>申请理由：</h3>
             <p>
+                @Html.LabelFor(m => m.Memo)
                 <br />
-                @Html.DisplayFor(m => m.Memo)
+                <br />
+                @Html.TextAreaFor(m => m.Memo, new { @readonly = "readonly" })
             </p>
             <p>
-                <input type="radio" id="agree_1" name="agree" value="1" /><label for="agree_1">同意
+                <input type="radio" id="agree_1" name="agree" value="true" /><label for="agree_1">同意
                 </label>
-                <input type="radio" id="agree_0" name="agree" value="0" /><label for="agree_0">不同意
+                <input type="radio" id="agree_0" name="agree" value="false" /><label for="agree_0">不同意
                 </label>
             </p>
         </fieldset>

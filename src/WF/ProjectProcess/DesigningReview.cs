@@ -9,29 +9,38 @@ using BLL;
 namespace WF.ProjectProcess
 {
 
-    public sealed class DesigningReview : NativeActivity
+    public sealed class DesigningReview : BaseActivity
     {
+        protected override bool CanInduceIdle { get { return true; } }
         [RequiredArgument]
         public InArgument<int> ID { get; set; }
         public OutArgument<bool> Rusult { get; set; }
-        private ProjectProcessService ProjectProcessService = new ProjectProcessService();
         protected override void Execute(NativeActivityContext context)
         {
             var id = ID.Get(context);
             var bookmark = UserRoleEnum.运营组组长.ToString();
-            ProjectProcessService.SetBookmark(id, bookmark);
+            var item = ProjectProcessService.GetById(id);
+            item.NextProcessAuthority = (int)UserRoleEnum.运营组组长;
+            item.Bookmark = bookmark;
+            item.ProjectProcessActivity = (int)ProjectProcessActivity.运营组组长评估;
+            ProjectProcessService.Save();
 
-
-            //通知所有用户
-
-
+            //通知运营组组长
             context.CreateBookmark(bookmark, new BookmarkCallback(this.Continue));
         }
 
         private void Continue(NativeActivityContext context, Bookmark bookmark, object obj)
         {
-            //完成
-            Rusult.Set(context, true);
+            var result = (bool)obj;
+            if (result)
+            {
+                //通知通过
+            }
+            else
+            {
+                //通知未通过
+            }
+            Rusult.Set(context, result);
         }
     }
 }

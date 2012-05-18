@@ -12,21 +12,22 @@ namespace BLL
 {
     public class LeaveProcessService : BaseService
     {
+        public LeaveProcessService(OAContext db) : base(db) { }
         public LeaveProcess GetById(int id)
         {
-            return db.LeaveProcessSet.Single(l => l.ID == id);
+            return db.LeaveProcesses.Single(l => l.ID == id);
         }
         public void Create(LeaveProcess model)
         {
             model.Adddate = DateTime.Now;
-            model.Owner = db.UserSet.Single(u => u.ID == model.Owner.ID);
-            db.LeaveProcessSet.Add(model);
+            model.Owner = db.Users.Single(u => u.ID == model.Owner.ID);
+            db.LeaveProcesses.Add(model);
             db.SaveChanges();
         }
 
         public void Update(LeaveProcess model)
         {
-            var old = db.LeaveProcessSet.Single(l => l.InstanceID == model.InstanceID);
+            var old = db.LeaveProcesses.Single(l => l.InstanceID == model.InstanceID);
             old.Bookmark = model.Bookmark;
             old.NextProcessAuthority = model.NextProcessAuthority;
             old.Result = model.Result;
@@ -37,14 +38,14 @@ namespace BLL
 
         public List<LeaveProcess> GetAllNeedToProcess(User user)
         {
-            var q = from l in db.LeaveProcessSet
+            var q = from l in db.LeaveProcesses.Include("Owner")
                     where (l.NextProcessAuthority & user.ID) == user.ID && l.Finished == false
                     select l;
             return q.ToList();
         }
         public List<LeaveProcess> GetAllFinishedProcess(User user)
         {
-            var q = from l in db.LeaveProcessSet
+            var q = from l in db.LeaveProcesses.Include("Owner")
                     where l.Owner.ID == user.ID && l.Finished == true
                     select l;
             return q.ToList();
@@ -58,7 +59,7 @@ namespace BLL
         public int GetThisMonthTimes(User user)
         {
             var thisMonth = DateTime.Now.Date.AddDays(-DateTime.Now.Day);
-            var list = db.LeaveProcessSet.Where(l =>
+            var list = db.LeaveProcesses.Where(l =>
                 l.Owner.ID == user.ID &&
                 l.Finished == true &&
                 l.Passed == true &&

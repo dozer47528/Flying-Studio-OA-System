@@ -11,20 +11,20 @@ namespace BLL
 {
     public class ArticleService : BaseService
     {
-
+        public ArticleService(OAContext db) : base(db) { }
         public Article GetItemById(int id)
         {
-            return db.ArticleSet.Single(a => a.ID == id);
+            return db.Articles.Single(a => a.ID == id);
 
         }
         public Article GetItemByIdWithAttachment(int id)
         {
-            var item = db.ArticleSet.Include("Attachment").Single(a => a.ID == id);
+            var item = db.Articles.Include("Attachment").Single(a => a.ID == id);
             return item;
         }
         public PagedList<Article> GetList(int page, int pageSize = 10, string search = null)
         {
-            var q = db.ArticleSet.OrderByDescending(a => a.AddDate);
+            var q = db.Articles.OrderByDescending(a => a.AddDate);
             Filter(q, search);
             return q.ToPagedList(page, pageSize);
         }
@@ -32,13 +32,13 @@ namespace BLL
         {
             article.Authority = string.IsNullOrEmpty(autority) ? 0 : AuthorityHelper.GetAuthority(autority.Split(','));
             article.AddDate = DateTime.Now;
-            db.ArticleSet.Add(article);
+            db.Articles.Add(article);
             db.SaveChanges();
             return article;
         }
         public Article Edit(Article article, string autority)
         {
-            var old = db.ArticleSet.Single(a => a.ID == article.ID);
+            var old = db.Articles.Single(a => a.ID == article.ID);
             old.Authority = string.IsNullOrEmpty(autority) ? 0 : AuthorityHelper.GetAuthority(autority.Split(','));
             old.Title = article.Title;
             old.Content = article.Content;
@@ -48,7 +48,7 @@ namespace BLL
         }
         public void Delete(int id)
         {
-            db.ArticleSet.Remove(db.ArticleSet.Single(a => a.ID == id));
+            db.Articles.Remove(db.Articles.Single(a => a.ID == id));
             db.SaveChanges();
         }
 

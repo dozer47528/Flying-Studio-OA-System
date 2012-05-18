@@ -9,19 +9,21 @@ using BLL;
 namespace WF.ProjectProcess
 {
 
-    public sealed class Coding : NativeActivity
+    public sealed class Coding : BaseActivity
     {
+        protected override bool CanInduceIdle { get { return true; } }
         [RequiredArgument]
         public InArgument<int> ID { get; set; }
-        private ProjectProcessService ProjectProcessService = new ProjectProcessService();
         protected override void Execute(NativeActivityContext context)
         {
             var id = ID.Get(context);
             var bookmark = UserRoleEnum.技术组成员.ToString();
-            ProjectProcessService.SetBookmark(id, bookmark);
 
-
-            //通知所有用户
+            var item = ProjectProcessService.GetById(id);
+            item.NextProcessAuthority = (int)UserRoleEnum.技术组成员;
+            item.Bookmark = bookmark;
+            item.ProjectProcessActivity = (int)ProjectProcessActivity.技术组编写;
+            ProjectProcessService.Save();
 
 
             context.CreateBookmark(bookmark, new BookmarkCallback(this.Continue));

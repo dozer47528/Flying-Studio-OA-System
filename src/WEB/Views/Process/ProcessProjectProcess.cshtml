@@ -1,0 +1,86 @@
+﻿@model MODEL.ProjectProcess
+@{
+    ViewBag.Title = "审批请假流程 | 工作流平台 | 办公OA系统";
+    Layout = "~/Views/Process/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("所有任务", "Index", "Process") &raquo;
+    @Html.ActionLink("审批请假流程", "Create", "Process", new { @class = "active" })
+    @if (!string.IsNullOrEmpty(Request["from"]))
+    {
+        @Html.Raw(" &raquo; ")
+        <a href="@Uri.UnescapeDataString(Request["from"])">返回来源页面</a>
+    }
+</h2>
+<div id="main">
+    <br />
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <p>
+                @Html.LabelFor(m => m.Memo)
+                <br />
+                <br />
+                @Html.TextAreaFor(m => m.Memo, new { @readonly = "readonly", @class = "textarea", style = "width:600px;height:300px" })
+                @Html.ValidationMessageFor(m => m.Memo)
+            </p>
+            @switch ((ProjectProcessActivity)Model.ProjectProcessActivity)
+            {
+                case ProjectProcessActivity.运营组设计:
+                    {
+                <p>
+                    @Html.LabelFor(m => m.File1)
+                    <br />
+                    <br />
+                    <input id="File1" name="File1" type="file" value="上传" />
+                </p>
+                        break;
+                    }
+                case ProjectProcessActivity.技术组编写:
+                    {
+                <p>
+                    @Html.LabelFor(m => m.File2)
+                    <br />
+                    <br />
+                    <input id="File2" name="File2" type="file" value="上传" />
+                </p>
+                        break;
+                    }
+                case ProjectProcessActivity.运营组组长评估:
+                    {
+                <p>
+                    @Html.LabelFor(m => m.File1)
+                    <br />
+                    <br />
+                    下载
+                </p>
+                        break;
+                    }
+                case ProjectProcessActivity.技术组组长评估:
+                    {
+                <p>
+                    @Html.LabelFor(m => m.File2)
+                    <br />
+                    <br />
+                    下载
+                </p>
+                        break;
+                    }
+            }
+            @if ((ProjectProcessActivity)Model.ProjectProcessActivity == ProjectProcessActivity.技术组组长评估 || (ProjectProcessActivity)Model.ProjectProcessActivity == ProjectProcessActivity.运营组组长评估)
+            {
+                <p>
+                    <input type="radio" id="agree_1" name="agree" value="true" /><label for="agree_1">同意
+                    </label>
+                    <input type="radio" id="agree_0" name="agree" value="false" /><label for="agree_0">不同意
+                    </label>
+                </p>
+            }
+            else
+            {
+                <input type="hidden" id="agree" name="agree" value="true" />
+            }
+        </fieldset>
+        <input type="submit" value="提交" />
+    }
+</div>

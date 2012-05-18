@@ -21,6 +21,7 @@ namespace WF
             }
         }
 
+        #region LeaveProcess
         public static Guid CreateAndRun_LeaveProcess(MODEL.LeaveProcess model, MODEL.User user)
         {
             return CreateAndRun(
@@ -33,9 +34,23 @@ namespace WF
         {
             RunInstance(model.InstanceID, model.Bookmark, new LeaveProcess.LeaveProcess(), isAgree);
         }
+        #endregion
 
+        #region ProjectProcess
+        public static Guid CreateAndRun_ProjectProcess(int id)
+        {
+            return CreateAndRun(
+                new Dictionary<string, object> { { "ProjectID", id } },
+                new ProjectProcess.ProjectProcess());
+        }
+        public static void RunInstance_ProjectProcess(MODEL.ProjectProcess model, bool isAgree = false)
+        {
+            RunInstance(model.InstanceID, model.Bookmark, new ProjectProcess.ProjectProcess(), isAgree);
+        }
+        #endregion
 
-        public static Guid CreateAndRun(IDictionary<string, object> data, Activity activity)
+        #region Private
+        private static Guid CreateAndRun(IDictionary<string, object> data, Activity activity)
         {
             SqlWorkflowInstanceStore instanceStore = new SqlWorkflowInstanceStore(ConnectString);
             WorkflowApplication application = new WorkflowApplication(activity, data);
@@ -53,8 +68,7 @@ namespace WF
             application.Run();
             return id;
         }
-
-        public static void RunInstance(Guid guid, string bookmark, Activity activity, object args)
+        private static void RunInstance(Guid guid, string bookmark, Activity activity, object args)
         {
             SqlWorkflowInstanceStore instanceStore = new SqlWorkflowInstanceStore(ConnectString);
             WorkflowApplication application = new WorkflowApplication(activity);
@@ -69,5 +83,7 @@ namespace WF
             application.Load(guid);
             application.ResumeBookmark(bookmark, args);
         }
+
+        #endregion
     }
 }

@@ -11,14 +11,14 @@ namespace DAL
     public class OAContext : DbContext
     {
         public OAContext() : base("DefaultConnection") { }
-        public DbSet<User> UserSet { get; set; }
-        public DbSet<Article> ArticleSet { get; set; }
-        public DbSet<UploadFile> UploadFileSet { get; set; }
-        public DbSet<UserRole> UserRoleSet { get; set; }
-        public DbSet<Inbox> InboxSet { get; set; }
-        public DbSet<LeaveProcess> LeaveProcessSet { get; set; }
-        public DbSet<ProjectProcess> ProjectProcessSet { get; set; }
-        public DbSet<AppraisalResult> AppraisalResultSet { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<UploadFile> UploadFiles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Inbox> Inboxs { get; set; }
+        public DbSet<LeaveProcess> LeaveProcesses { get; set; }
+        public DbSet<ProjectProcess> ProjectProcesses { get; set; }
+        public DbSet<AppraisalResult> AppraisalResults { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -35,39 +35,39 @@ namespace DAL
         {
             #region InitRole
             var admin = new UserRole { Name = UserRoleEnum.执行站长.ToString(), Describe = UserRoleEnum.执行站长.ToString(), RoleEnum = (int)UserRoleEnum.执行站长 };
-            db.UserRoleSet.Add(admin);
+            db.UserRoles.Add(admin);
             db.SaveChanges();
 
             var bangong = new UserRole { FatherRole = admin, Name = UserRoleEnum.办公组组长.ToString(), Describe = UserRoleEnum.办公组组长.ToString(), RoleEnum = (int)UserRoleEnum.办公组组长 };
-            db.UserRoleSet.Add(bangong);
+            db.UserRoles.Add(bangong);
             db.SaveChanges();
             var bangong2 = new UserRole { FatherRole = bangong, Name = UserRoleEnum.办公组成员.ToString(), Describe = UserRoleEnum.办公组成员.ToString(), RoleEnum = (int)UserRoleEnum.办公组成员 };
-            db.UserRoleSet.Add(bangong2);
+            db.UserRoles.Add(bangong2);
             db.SaveChanges();
 
 
             var jishu = new UserRole { FatherRole = admin, Name = UserRoleEnum.技术组组长.ToString(), Describe = UserRoleEnum.技术组组长.ToString(), RoleEnum = (int)UserRoleEnum.技术组组长 };
-            db.UserRoleSet.Add(jishu);
+            db.UserRoles.Add(jishu);
             db.SaveChanges();
             var jishu2 = new UserRole { FatherRole = jishu, Name = UserRoleEnum.技术组成员.ToString(), Describe = UserRoleEnum.技术组成员.ToString(), RoleEnum = (int)UserRoleEnum.技术组成员 };
-            db.UserRoleSet.Add(jishu2);
+            db.UserRoles.Add(jishu2);
             db.SaveChanges();
 
 
             var yunying = new UserRole { FatherRole = admin, Name = UserRoleEnum.运营组组长.ToString(), Describe = UserRoleEnum.运营组组长.ToString(), RoleEnum = (int)UserRoleEnum.运营组组长 };
-            db.UserRoleSet.Add(yunying);
+            db.UserRoles.Add(yunying);
             db.SaveChanges();
             var yunying2 = new UserRole { FatherRole = yunying, Name = UserRoleEnum.运营组成员.ToString(), Describe = UserRoleEnum.运营组成员.ToString(), RoleEnum = (int)UserRoleEnum.运营组成员 };
-            db.UserRoleSet.Add(yunying2);
+            db.UserRoles.Add(yunying2);
             db.SaveChanges();
             #endregion
         }
 
         public static void InitTestData(this OAContext db)
         {
-            var role = db.UserRoleSet.First(u => u.RoleEnum == (int)UserRoleEnum.执行站长);
-            var role1 = db.UserRoleSet.First(u => u.RoleEnum == (int)UserRoleEnum.办公组组长);
-            var role2 = db.UserRoleSet.First(u => u.RoleEnum == (int)UserRoleEnum.办公组成员);
+            var role = db.UserRoles.First(u => u.RoleEnum == (int)UserRoleEnum.执行站长);
+            var role1 = db.UserRoles.First(u => u.RoleEnum == (int)UserRoleEnum.办公组组长);
+            var role2 = db.UserRoles.First(u => u.RoleEnum == (int)UserRoleEnum.办公组成员);
             var user = new User
             {
                 NickName = "Dozer",
@@ -109,9 +109,9 @@ namespace DAL
                 Role = role2,
                 Username = "dozer47528",
             };
-            db.UserSet.Add(user);
-            db.UserSet.Add(user1);
-            db.UserSet.Add(user2);
+            db.Users.Add(user);
+            db.Users.Add(user1);
+            db.Users.Add(user2);
 
 
             for (var k = 0; k < 100; k++)
@@ -124,7 +124,7 @@ namespace DAL
                     Owner = user,
                     Title = "title",
                 };
-                db.ArticleSet.Add(article);
+                db.Articles.Add(article);
             }
             db.SaveChanges();
         }

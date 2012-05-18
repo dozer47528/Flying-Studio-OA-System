@@ -1,0 +1,64 @@
+﻿@model MODEL.ProjectProcess
+@{
+    ViewBag.Title = "审批请假流程 | 工作流平台 | 办公OA系统";
+    Layout = "~/Views/Process/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("所有任务", "Index", "Process") &raquo;
+    @Html.ActionLink("审批请假流程", "Create", "Process", new { @class = "active" })
+    @if (!string.IsNullOrEmpty(Request["from"]))
+    {
+        @Html.Raw(" &raquo; ")
+        <a href="@Uri.UnescapeDataString(Request["from"])">返回来源页面</a>
+    }
+</h2>
+<div id="main">
+    <br />
+    @using (Html.BeginForm())
+    {
+        <fieldset>
+            <p>
+                @Html.LabelFor(m => m.Memo)
+                <br />
+                <br />
+                @Html.TextAreaFor(m => m.Memo, new { @readonly = "readonly", @class = "textarea", style = "width:600px;height:300px" })
+                @Html.ValidationMessageFor(m => m.Memo)
+            </p>
+            <p>
+                <div id="chart_div"></div>
+            </p>
+            <p>
+                <input type="radio" id="agree_1" name="agree" value="true" /><label for="agree_1">同意
+                </label>
+                <input type="radio" id="agree_0" name="agree" value="false" /><label for="agree_0">不同意
+                </label>
+                @Html.ValidationMessage("agree")
+            </p>
+        </fieldset>
+        <input type="submit" value="提交" />
+    }
+</div>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load('visualization', '1.0', { 'packages': ['corechart'] });
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['同意', @ViewBag.Agree],
+          ['不同意', @ViewBag.Disagree],
+          ['未投票', @ViewBag.Other],
+        ]);
+
+        // Set chart options
+        var options = {
+            'title': '可行性评估结果',
+            'width': 400,
+            'height': 300
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>

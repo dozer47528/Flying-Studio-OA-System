@@ -9,7 +9,7 @@ using BLL;
 namespace WF.LeaveProcess
 {
 
-    public class Process : NativeActivity
+    public class Process : BaseActivity
     {
         protected override bool CanInduceIdle
         {
@@ -22,8 +22,6 @@ namespace WF.LeaveProcess
         public InOutArgument<MODEL.User> User { get; set; }
         public OutArgument<bool> Agree { get; set; }
         public InOutArgument<MODEL.LeaveProcess> Model { get; set; }
-        protected LeaveProcessService LeaveProcessService = new LeaveProcessService();
-        protected UserService UserService = new UserService();
 
 
         protected override void Execute(NativeActivityContext context)

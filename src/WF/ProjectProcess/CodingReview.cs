@@ -9,20 +9,22 @@ using BLL;
 namespace WF.ProjectProcess
 {
 
-    public sealed class CodingReview : NativeActivity
+    public sealed class CodingReview : BaseActivity
     {
+        protected override bool CanInduceIdle { get { return true; } }
         [RequiredArgument]
         public InArgument<int> ID { get; set; }
         public OutArgument<bool> Rusult { get; set; }
-        private ProjectProcessService ProjectProcessService = new ProjectProcessService();
         protected override void Execute(NativeActivityContext context)
         {
             var id = ID.Get(context);
             var bookmark = UserRoleEnum.技术组组长.ToString();
-            ProjectProcessService.SetBookmark(id, bookmark);
 
-
-            //通知所有用户
+            var item = ProjectProcessService.GetById(id);
+            item.NextProcessAuthority = (int)UserRoleEnum.技术组组长;
+            item.Bookmark = bookmark;
+            item.ProjectProcessActivity = (int)ProjectProcessActivity.技术组组长评估;
+            ProjectProcessService.Save();
 
 
             context.CreateBookmark(bookmark, new BookmarkCallback(this.Continue));
@@ -30,8 +32,16 @@ namespace WF.ProjectProcess
 
         private void Continue(NativeActivityContext context, Bookmark bookmark, object obj)
         {
-            //完成
-            Rusult.Set(context, true);
+            var result = (bool)obj;
+            if (result)
+            {
+                //通知通过
+            }
+            else
+            {
+                //通知未通过
+            }
+            Rusult.Set(context, result);
         }
     }
 }

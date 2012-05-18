@@ -8,11 +8,10 @@ using BLL;
 namespace WF.LeaveProcess
 {
 
-    public class Agree : CodeActivity
+    public class Agree : BaseActivity
     {
         public InOutArgument<MODEL.LeaveProcess> Model { get; set; }
-        protected LeaveProcessService LeaveProcessService = new LeaveProcessService();
-        protected override void Execute(CodeActivityContext context)
+        protected override void Execute(NativeActivityContext context)
         {
             var model = Model.Get(context);
             model.Result += "同意";

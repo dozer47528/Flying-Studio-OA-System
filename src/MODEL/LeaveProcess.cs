@@ -8,10 +8,11 @@ namespace MODEL
 {
     public class LeaveProcess : BaseProcess
     {
-        public LeaveProcess() {
+        public LeaveProcess()
+        {
             ProcessName = "请假流程";
         }
-        [Display(Name = "请假理由")]
+        [Display(Name = "请假理由"), Required]
         public string Memo { get; set; }
         [Display(Name = "开始时间"), Required]
         public DateTime? StartDate { get; set; }

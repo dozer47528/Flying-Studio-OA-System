@@ -11,6 +11,7 @@ namespace BLL
     public class InboxService : BaseService
     {
 
+        public InboxService(OAContext db) : base(db) { }
 
     }
 }

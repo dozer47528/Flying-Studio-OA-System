@@ -22,6 +22,7 @@
                 <br />
                 <br />
                 @Html.TextAreaFor(m => m.Memo, new { @class = "textarea" })
+                @Html.ValidationMessageFor(m => m.Memo)
             </p>
             <p>
                 @Html.LabelFor(m => m.StartDate)
