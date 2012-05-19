@@ -6,12 +6,19 @@ using System.Web.Mvc;
 
 namespace WEB.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
-        public ActionResult Index()
+        [HttpPost]
+        public ActionResult Login(string username, string password)
         {
-            return View();
+            var result = UserService.Login(username, password);
+            return Json(new { Result = result });
         }
-
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            UserService.Logout();
+            return Json(new { Result = true });
+        }
     }
 }

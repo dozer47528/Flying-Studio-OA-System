@@ -52,3 +52,36 @@ function SetJqueryUI() {
 function ConfirmDelete() {
     return confirm('确认删除?');
 }
+
+
+var login_html;
+function LoginForm() {
+    $('#username').val('');
+    $('#password').val('');
+    login_html = $("#login_html").dialog({
+        modal: true
+    });
+}
+function Login(url) {
+    $.post(url, { username: $('#username').val(), password: $('#password').val() },
+		function (data, textStatus) {
+		    login_html.dialog('destroy');
+		    if (data.Result == true) {
+		        $('#login').hide();
+		        $('#logout').show();
+		        alert('登录成功！');
+		    }
+		    else {
+		        alert('登录失败！');
+		    }
+		}, "json");
+}
+
+function Logout(url) {
+    $.post(url, {},
+		function (data, textStatus) {
+		    $('#logout').hide();
+		    $('#login').show();
+		    alert('退出成功！');
+		}, "json");
+}

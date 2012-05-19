@@ -5,10 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using MODEL;
+using WEB.Filters;
 using WF;
 
 namespace WEB.Controllers
 {
+    [TheAuthorizationFilter(AllowRoles = UserRoleEnum.全员)]
     public class ProcessController : BaseController
     {
         public ActionResult Index()
@@ -22,12 +24,12 @@ namespace WEB.Controllers
             return View(result);
         }
 
-        public ActionResult Finished()
+        public ActionResult My()
         {
             var result = new List<BaseProcess>();
             var user = UserService.GetUserByCookie();
-            var list = LeaveProcessService.GetAllFinishedProcess(user).Select(u => u as BaseProcess);
-            var list2 = ProjectProcessService.GetAllFinishedProcess(user).Select(u => u as BaseProcess);
+            var list = LeaveProcessService.GetMyProcess(user).Select(u => u as BaseProcess);
+            var list2 = ProjectProcessService.GetMyProcess(user).Select(u => u as BaseProcess);
             result.AddRange(list);
             result.AddRange(list2);
             return View(result);
@@ -36,7 +38,7 @@ namespace WEB.Controllers
         #region LeaveProcess
         public ActionResult CreateLeaveProcess()
         {
-            ConvertFromUrl();
+            if (ConvertFromUrl()) return null;
             return View(new LeaveProcess());
         }
         [HttpPost]
@@ -56,7 +58,7 @@ namespace WEB.Controllers
         }
         public ActionResult ProcessLeaveProcess(int? id)
         {
-            ConvertFromUrl();
+            if (ConvertFromUrl()) return null;
             return View(LeaveProcessService.GetById(id ?? 0));
         }
         [HttpPost]
@@ -80,7 +82,7 @@ namespace WEB.Controllers
         }
         public ActionResult CreateProjectProcess()
         {
-            ConvertFromUrl();
+            if (ConvertFromUrl()) return null;
             return View(new ProjectProcess());
         }
         [HttpPost]
@@ -94,8 +96,7 @@ namespace WEB.Controllers
 
         public ActionResult ProcessProjectProcess(int id)
         {
-            ConvertFromUrl();
-
+            if (ConvertFromUrl()) return null;
             var item = ProjectProcessService.GetByIdAndAppraisal(id);
 
             if (item.ProjectProcessActivity == (int)ProjectProcessActivity.可行性评估)

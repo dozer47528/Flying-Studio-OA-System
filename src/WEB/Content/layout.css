@@ -222,25 +222,25 @@ h3 {
         text-decoration: underline;
     }
 
-#main fieldset {
+fieldset {
     border: 1px solid #ddd;
     padding: 19px;
     margin: 0 0 20px 0;
     background: #fbfbfb;
 }
 
-    #main fieldset p {
+    fieldset p {
         margin: 0 0 14px 0;
         float: left;
         width: 100%;
     }
 
-    #main fieldset label {
+    fieldset label {
         margin: 0 0 7px 0;
         line-height: 12px;
     }
 
-    #main fieldset .text-full {
+    fieldset .text-full {
         border: 1px solid #ddd;
         background: #fff url(Images/input-shaddow.gif) no-repeat left top;
         font: 11px Arial, Helvetica, sans-serif;
@@ -250,7 +250,7 @@ h3 {
         float: left;
     }
 
-    #main fieldset .text-long {
+    fieldset .text-long {
         border: 1px solid #ddd;
         background: #fff url(Images/input-shaddow.gif) no-repeat left top;
         font: 11px Arial, Helvetica, sans-serif;
@@ -261,7 +261,7 @@ h3 {
         margin: 0 10px 0 0;
     }
 
-    #main fieldset .text-medium {
+    fieldset .text-medium {
         border: 1px solid #ddd;
         background: #fff url(Images/input-shaddow.gif) no-repeat left top;
         font: 11px Arial, Helvetica, sans-serif;
@@ -272,7 +272,7 @@ h3 {
         margin: 0 10px 0 0;
     }
 
-    #main fieldset .text-small {
+    fieldset .text-small {
         border: 1px solid #ddd;
         background: #fff url(Images/input-shaddow.gif) no-repeat left top;
         font: 11px Arial, Helvetica, sans-serif;
@@ -283,22 +283,22 @@ h3 {
         margin: 0 10px 0 0;
     }
 
-        #main fieldset .text-long:focus, #main fieldset .text-medium:focus, #main fieldset .text-small:focus, #main fieldset textarea:focus {
-            background: #fdfcf6 url(Images/input-shaddow-hover.gif) no-repeat left top;
-        }
+#main fieldset .text-long:focus, #main fieldset .text-medium:focus, #main fieldset .text-small:focus, #main fieldset textarea:focus {
+    background: #fdfcf6 url(Images/input-shaddow-hover.gif) no-repeat left top;
+}
 
-    #main fieldset textarea {
-        border: 1px solid #ddd;
-        background: #fff url(Images/input-shaddow.gif) no-repeat left top;
-        font: 11px Arial, Helvetica, sans-serif;
-        color: #646464;
-        padding: 5px 7px;
-        width: 364px;
-        float: left;
-        margin: 0 10px 0 0;
-        height: 148px;
-        overflow: hidden;
-    }
+fieldset textarea {
+    border: 1px solid #ddd;
+    background: #fff url(Images/input-shaddow.gif) no-repeat left top;
+    font: 11px Arial, Helvetica, sans-serif;
+    color: #646464;
+    padding: 5px 7px;
+    width: 364px;
+    float: left;
+    margin: 0 10px 0 0;
+    height: 148px;
+    overflow: hidden;
+}
 
 .button-submit {
     font: 11px Arial, Helvetica, sans-serif;

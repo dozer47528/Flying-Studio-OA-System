@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using DAL;
+using MODEL;
 using Utility;
 
 namespace WEB.Controllers
@@ -40,14 +41,18 @@ namespace WEB.Controllers
             UploadFileService = new UploadFileService(db);
             LeaveProcessService = new LeaveProcessService(db);
             ProjectProcessService = new ProjectProcessService(db);
+
+            ViewBag.IsLogin = UserService.GetUserByCookie() != null;
         }
 
-        protected void ConvertFromUrl()
+        protected bool ConvertFromUrl()
         {
             if (string.IsNullOrEmpty(Request["from"]) && Request.UrlReferrer != null && Request.UrlReferrer.ToString() != Request.Url.ToString())
             {
                 Response.Redirect(MvcUrlHelper.GetFromUrl(Request.Url.ToString(), Request.UrlReferrer.ToString()));
+                return true;
             }
+            return false;
         }
 
         protected ActionResult RedirectFrom()
@@ -58,5 +63,18 @@ namespace WEB.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        protected ActionResult AlertAndRedirect(string msg, string action, string controller)
+        {
+            return AlertAndRedirect(msg, Url.Action(action, controller));
+        }
+        protected ActionResult AlertAndRedirect(string msg, string url)
+        {
+            return Content(string.Format(@"<script>alert('{0}')</script>
+                                           <script>location.href='{1}'</script>", msg, url));
+        }
+
+
     }
 }

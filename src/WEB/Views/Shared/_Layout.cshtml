@@ -20,7 +20,9 @@
             </li>
             <li><a class="controller_Attendance" href="@Url.Action("Index", "Attendance")">¿¼ÇÚÆ½Ì¨</a>
             </li>
-            <li class="logout"><a href="#">LOGOUT</a></li>
+            @{var isLogin = (bool)ViewBag.IsLogin;}
+            <li class="logout" id="login" style="@(isLogin?"display: none":"")"><a href="javascript:LoginForm();">µÇÂ¼</a></li>
+            <li class="logout" id="logout" style="@(isLogin?"":"display: none")"><a href="javascript:Logout('@Url.Action("Logout","User")');">ÍË³ö</a></li>
         </ul>
         <!-- // #end mainNav -->
         <div id="containerHolder">
@@ -38,9 +40,25 @@
     <!-- // #wrapper -->
     <input id="controller" type="hidden" value="@Html.ViewContext.RouteData.Values["controller"].ToString().ToLower()"/>
     <input id="action" type="hidden" value="@Html.ViewContext.RouteData.Values["action"].ToString().ToLower()"/>
+    <!-- // #µÇÂ¼ -->
+    <div id="login_html" style="display: none">
+        <div>
+            <fieldset>
+                <p>
+                    <label for="username">ÕÊºÅ£º</label>
+                    <input type="text" name="username" value="" id="username" />
+                </p>
+                <p>
+                    <label for="password">ÃÜÂë£º</label>
+                    <input type="password" name="password" value="" id="password" />
+                </p>
+            </fieldset>
+            <button onclick="Login('@Url.Action("Login", "User")')">µÇÂ¼</button>
+        </div>
+    </div>
 </body>
 <script src="@Url.Content("~/Scripts/jquery-1.7.2.min.js")"></script>
-<script src="@Url.Content("~/Scripts/jquery-ui-1.8.19.min.js")"></script>
+<script src="@Url.Content("~/Scripts/jquery-ui-1.8.20.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jqueryui_zhcn.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")"></script>

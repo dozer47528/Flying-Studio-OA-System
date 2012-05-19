@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using BLL;
 using MODEL;
-
+using WEB.Filters;
 namespace WEB.Controllers
 {
+    [TheAuthorizationFilter(AllowRoles = UserRoleEnum.全员)]
     public class InformationController : BaseController
     {
-
         public ActionResult Index(int? id)
         {
             if (Request.IsAjaxRequest())
@@ -19,9 +19,10 @@ namespace WEB.Controllers
             }
             return View(ArticleService.GetList(id ?? 1));
         }
+
         public ActionResult Create()
         {
-            ConvertFromUrl();
+            if (ConvertFromUrl()) return null;
             ViewBag.UserRole = UserRoleService.GetList();
             return View(new Article());
         }
@@ -46,8 +47,11 @@ namespace WEB.Controllers
 
         public ActionResult Edit(int? id)
         {
-            ConvertFromUrl();
+            if (ConvertFromUrl()) return null;
+            var user = UserService.GetUserByCookie();
             var article = ArticleService.GetItemById(id ?? 0);
+            if (!ArticleService.CheckMyOwnOrAdmin(article, user)) return AlertAndRedirect("你没有权限！", "Index", "Information");
+
             UploadFileService.InitArticleFiles(article.TempID.ToString(), article.ID);
             ViewBag.UserRole = UserRoleService.GetList();
             return View(article);
@@ -70,9 +74,10 @@ namespace WEB.Controllers
             }
         }
 
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
-            ArticleService.Delete(id ?? 0);
+            var user = UserService.GetUserByCookie();
+            if (!ArticleService.Delete(id, user)) return AlertAndRedirect("你没有权限！", "Index", "Information");
             return RedirectFrom();
         }
 

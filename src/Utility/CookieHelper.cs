@@ -11,8 +11,8 @@ namespace Utility
         private const string COOKIE_PREFIX = "oa_";
 
 
-        private static readonly TimeSpan EXCEED_TIME = new TimeSpan(30, 0, 0, 0, 0);
-        private static readonly TimeSpan EXCEED_TIME_Temp = new TimeSpan(1, 0, 0);
+        private static readonly TimeSpan EXCEED_TIME = new TimeSpan(0, 30, 0);
+        private static readonly TimeSpan EXCEED_TIME_Temp = new TimeSpan(0, 15, 0);
 
         private static HttpRequestBase Request
         {
@@ -26,8 +26,9 @@ namespace Utility
 
         public static void Delete(string key)
         {
-            Response.Cookies.Remove(key);
-            Request.Cookies.Remove(key);
+            var cookie = new HttpCookie(COOKIE_PREFIX + key, "") { Expires = DateTime.Now - EXCEED_TIME };
+            Response.Cookies.Set(cookie);
+            Request.Cookies.Set(cookie);
         }
         public static void Post(string key, string value)
         {

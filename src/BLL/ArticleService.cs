@@ -14,8 +14,8 @@ namespace BLL
         public Article GetItemById(int id)
         {
             return db.Articles.Single(a => a.ID == id);
-
         }
+
         public Article GetItemByIdWithAttachment(int id)
         {
             var item = db.Articles.Include("Attachment").Single(a => a.ID == id);
@@ -45,10 +45,13 @@ namespace BLL
             db.SaveChanges();
             return old;
         }
-        public void Delete(int id)
+        public bool Delete(int id, User user)
         {
-            db.Articles.Remove(db.Articles.Single(a => a.ID == id));
+            var article = db.Articles.Single(a => a.ID == id);
+            if (!CheckMyOwnOrAdmin(article, user)) return false;
+            db.Articles.Remove(article);
             db.SaveChanges();
+            return true;
         }
 
         private IQueryable<Article> Filter(IQueryable<Article> query, string search)
@@ -60,6 +63,25 @@ namespace BLL
                             a.Owner.FirstName.Contains(search));
             }
             return query;
+        }
+
+        public bool CheckMyOwnOrAdmin(Article article, User user)
+        {
+            //执行站长可以修改所有
+            if (user.Role.RoleEnum == (int)UserRoleEnum.执行站长) return true;
+
+            LoadReference(article, a => a.Owner);
+            var owner = article.Owner;
+
+            //如果是自己，也可以修改
+            if (owner.ID == user.ID) return true;
+
+            //上级主管也有权限修改
+            LoadReference(owner, u => u.Role);
+            LoadReference(owner.Role, r => r.FatherRole);
+            if (owner.Role.FatherRole.ID == user.Role.ID) return true;
+
+            return false;
         }
     }
 }

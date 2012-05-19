@@ -42,10 +42,10 @@ namespace BLL
                     select l;
             return q.ToList();
         }
-        public List<LeaveProcess> GetAllFinishedProcess(User user)
+        public List<LeaveProcess> GetMyProcess(User user)
         {
             var q = from l in db.LeaveProcesses.Include("Owner")
-                    where l.Owner.ID == user.ID && l.Finished == true
+                    where l.Owner.ID == user.ID
                     select l;
             return q.ToList();
         }

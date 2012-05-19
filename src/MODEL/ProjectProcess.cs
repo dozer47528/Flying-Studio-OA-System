@@ -20,6 +20,7 @@ namespace MODEL
         [Display(Name = "项目代码")]
         public string File2 { get; set; }
         public string ActivityName { get; set; }
+        [Display(Name = "流程阶段")]
         public int ProjectProcessActivity { get; set; }
         public ICollection<AppraisalResult> AppraisalResult { get; set; }
     }

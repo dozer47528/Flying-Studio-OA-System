@@ -38,10 +38,10 @@ namespace BLL
 
         public ProjectProcessService(OAContext db) : base(db) { }
 
-        public List<ProjectProcess> GetAllFinishedProcess(User user)
+        public List<ProjectProcess> GetMyProcess(User user)
         {
             var q = from l in db.ProjectProcesses.Include("Owner")
-                    where l.Owner.ID == user.ID && l.Finished == true
+                    where l.Owner.ID == user.ID
                     select l;
             return q.ToList();
         }
@@ -67,11 +67,6 @@ namespace BLL
         {
             project.Adddate = DateTime.Now;
             db.ProjectProcesses.Add(project);
-            db.SaveChanges();
-        }
-
-        public void Save()
-        {
             db.SaveChanges();
         }
 

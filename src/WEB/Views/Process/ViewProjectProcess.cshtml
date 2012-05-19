@@ -16,23 +16,35 @@
     <br />
     <fieldset>
         <p>
+            @Html.LabelFor(m => m.ProjectProcessActivity)
+            <br />
+            <br />
+            @((ProjectProcessActivity)Model.ProjectProcessActivity)
+        </p>
+        <p>
             @Html.LabelFor(m => m.Memo)
             <br />
             <br />
             @Html.TextAreaFor(m => m.Memo, new { @readonly = "readonly", @class = "textarea", style = "width:600px;height:300px" })
             @Html.ValidationMessageFor(m => m.Memo)
         </p>
-        <p>
-            @Html.LabelFor(m => m.File1)
-            <br />
-            <br />
-            <a target="_blank" href="@Url.Content(Model.File1)">下载</a>
-        </p>
-        <p>
-            @Html.LabelFor(m => m.File2)
-            <br />
-            <br />
-            <a target="_blank" href="@Url.Content(Model.File2)">下载</a>
-        </p>
+        @if (!string.IsNullOrWhiteSpace(Model.File1))
+        {
+            <p>
+                @Html.LabelFor(m => m.File1)
+                <br />
+                <br />
+                <a target="_blank" href="@Url.Content(Model.File1)">下载</a>
+            </p>
+        }
+        @if (!string.IsNullOrWhiteSpace(Model.File2))
+        {
+            <p>
+                @Html.LabelFor(m => m.File2)
+                <br />
+                <br />
+                <a target="_blank" href="@Url.Content(Model.File2)">下载</a>
+            </p>
+        }
     </fieldset>
 </div>
