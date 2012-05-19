@@ -2,13 +2,40 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web;
 using DAL;
 using MODEL;
-
+using System.IO;
 namespace BLL
 {
     public class ProjectProcessService : BaseService
     {
+        private HttpContextBase context;
+        protected HttpContextBase Context
+        {
+            get { return context ?? (context = new HttpContextWrapper(HttpContext.Current)); }
+        }
+        public string FileUrl
+        {
+            get
+            {
+                return "~/file/" + DateTime.Now.ToString("yyyy-MM-dd");
+            }
+        }
+        public string FilePath
+        {
+            get
+            {
+                var path = Context.Server.MapPath(FileUrl);
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                return path;
+            }
+        }
+
+
         public ProjectProcessService(OAContext db) : base(db) { }
 
         public List<ProjectProcess> GetAllFinishedProcess(User user)
@@ -21,7 +48,7 @@ namespace BLL
         public List<ProjectProcess> GetAllNeedToProcess(User user)
         {
             var q = from l in db.ProjectProcesses.Include("Owner")
-                    where (l.NextProcessAuthority & user.ID) == user.ID && l.Finished == false
+                    where (l.NextProcessAuthority & user.Role.RoleEnum) == user.Role.RoleEnum && l.Finished == false
                     select l;
             return q.ToList();
         }
@@ -71,6 +98,45 @@ namespace BLL
         {
             db.Entry(project).Collection(p => p.AppraisalResult).Load();
             return new Tuple<int, int>(project.AppraisalResult.Count(p => p.IsAgree == true), project.AppraisalResult.Count(p => p.IsAgree == false));
+        }
+
+        public void UpLoadFile(ProjectProcess project, HttpPostedFileBase file)
+        {
+            var path = SaveFile(file);
+            if (project.ProjectProcessActivity == (int)ProjectProcessActivity.运营组设计)
+            {
+                if (!string.IsNullOrEmpty(project.File1))
+                {
+                    DeleteFile(project.File1);
+                }
+                project.File1 = path;
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(project.File2))
+                {
+                    DeleteFile(project.File2);
+                }
+                project.File2 = path;
+            }
+            db.SaveChanges();
+        }
+        private string SaveFile(HttpPostedFileBase file)
+        {
+            var fileName = file.FileName;
+            var fullName = Path.Combine(FilePath, Guid.NewGuid().ToString() + Path.GetExtension(fileName));
+            var fullUrl = FileUrl + "/" + Path.GetFileName(fullName);
+            file.SaveAs(fullName);
+            return fullUrl;
+        }
+
+        private void DeleteFile(string path)
+        {
+            var filePath = Context.Server.MapPath(path);
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
         }
     }
 }

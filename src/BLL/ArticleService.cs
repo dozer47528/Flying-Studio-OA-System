@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using DAL;
 using MODEL;
-using Ninject;
 using Webdiyer.WebControls.Mvc;
 using Utility;
 namespace BLL

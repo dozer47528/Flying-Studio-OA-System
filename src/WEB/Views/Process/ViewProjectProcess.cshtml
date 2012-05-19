@@ -1,0 +1,38 @@
+﻿@model MODEL.ProjectProcess
+@{
+    ViewBag.Title = "查看项目流程 | 工作流平台 | 办公OA系统";
+    Layout = "~/Views/Process/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("所有任务", "Index", "Process") &raquo;
+    @Html.ActionLink("查看项目流程", "ProcessProjectProcess", "Process", new { @class = "active" })
+    @if (Request.UrlReferrer != null)
+    {
+        @Html.Raw(" &raquo; ")
+        <a href="@Request.UrlReferrer.ToString()">返回来源页面</a>
+    }
+</h2>
+<div id="main">
+    <br />
+    <fieldset>
+        <p>
+            @Html.LabelFor(m => m.Memo)
+            <br />
+            <br />
+            @Html.TextAreaFor(m => m.Memo, new { @readonly = "readonly", @class = "textarea", style = "width:600px;height:300px" })
+            @Html.ValidationMessageFor(m => m.Memo)
+        </p>
+        <p>
+            @Html.LabelFor(m => m.File1)
+            <br />
+            <br />
+            <a target="_blank" href="@Url.Content(Model.File1)">下载</a>
+        </p>
+        <p>
+            @Html.LabelFor(m => m.File2)
+            <br />
+            <br />
+            <a target="_blank" href="@Url.Content(Model.File2)">下载</a>
+        </p>
+    </fieldset>
+</div>

@@ -56,7 +56,7 @@ namespace WEB.Controllers
             {
                 return Redirect(Uri.UnescapeDataString(Request["from"]));
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
     }
 }

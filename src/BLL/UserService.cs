@@ -15,7 +15,7 @@ namespace BLL
         {
 
             var id = int.Parse(CookieHelper.Get(USER_ID_NAME));
-            return db.Users.Single(u => u.ID == id);
+            return db.Users.Include("Role").Single(u => u.ID == id);
         }
 
         public UserRole LoadFartherRole(User user)

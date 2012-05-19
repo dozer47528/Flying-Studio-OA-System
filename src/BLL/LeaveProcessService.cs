@@ -5,7 +5,6 @@ using System.Text;
 using System.Web.Mvc;
 using DAL;
 using MODEL;
-using Ninject;
 using Webdiyer.WebControls.Mvc;
 
 namespace BLL
@@ -39,7 +38,7 @@ namespace BLL
         public List<LeaveProcess> GetAllNeedToProcess(User user)
         {
             var q = from l in db.LeaveProcesses.Include("Owner")
-                    where (l.NextProcessAuthority & user.ID) == user.ID && l.Finished == false
+                    where (l.NextProcessAuthority & user.Role.RoleEnum) == user.Role.RoleEnum && l.Finished == false
                     select l;
             return q.ToList();
         }

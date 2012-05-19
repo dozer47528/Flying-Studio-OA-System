@@ -6,7 +6,6 @@ using System.Text;
 using System.Web;
 using DAL;
 using MODEL;
-using Ninject;
 using Utility;
 using Newtonsoft.Json;
 

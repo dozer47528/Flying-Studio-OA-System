@@ -1,11 +1,11 @@
 ﻿@model MODEL.ProjectProcess
 @{
-    ViewBag.Title = "审批请假流程 | 工作流平台 | 办公OA系统";
+    ViewBag.Title = "审批项目流程 | 工作流平台 | 办公OA系统";
     Layout = "~/Views/Process/_Layout.cshtml";
 }
 <h2>
     @Html.ActionLink("所有任务", "Index", "Process") &raquo;
-    @Html.ActionLink("审批请假流程", "Create", "Process", new { @class = "active" })
+    @Html.ActionLink("审批项目流程", "ProcessProjectProcess", "Process", new { @class = "active" })
     @if (!string.IsNullOrEmpty(Request["from"]))
     {
         @Html.Raw(" &raquo; ")

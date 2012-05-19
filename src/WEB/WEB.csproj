@@ -120,6 +120,7 @@
     <Compile Include="Controllers\InformationController.cs" />
     <Compile Include="Controllers\ProcessController.cs" />
     <Compile Include="Controllers\UploadFileController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -535,6 +536,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Process\ProcessProjectProcess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Process\ViewLeaveProcess.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Process\ViewProjectProcess.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

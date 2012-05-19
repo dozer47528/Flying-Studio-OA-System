@@ -5,7 +5,7 @@
 }
 <h2>
     @Html.ActionLink("所有任务", "Index", "Process") &raquo;
-    @Html.ActionLink("新增请假流程", "Create", "Process", new { @class = "active" })
+    @Html.ActionLink("新增请假流程", "CreateLeaveProcess", "Process", new { @class = "active" })
     @if (!string.IsNullOrEmpty(Request["from"]))
     {
         @Html.Raw(" &raquo; ")

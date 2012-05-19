@@ -66,9 +66,18 @@ namespace WEB.Controllers
             WorkFlowContext.RunInstance_LeaveProcess(item, agree);
             return RedirectFrom();
         }
+
+        public ActionResult ViewLeaveProcess(int id)
+        {
+            return View(LeaveProcessService.GetById(id));
+        }
         #endregion
 
         #region ProjectPrecess
+        public ActionResult ViewProjectProcess(int id)
+        {
+            return View(ProjectProcessService.GetById(id));
+        }
         public ActionResult CreateProjectProcess()
         {
             ConvertFromUrl();
@@ -113,24 +122,24 @@ namespace WEB.Controllers
                     ModelState.AddModelError("agree", "您已经投过票了!");
                 }
             }
-            else if (item.ProjectProcessActivity == (int)ProjectProcessActivity.技术组编写)
+            else if (item.ProjectProcessActivity == (int)ProjectProcessActivity.技术组编写 ||
+                     item.ProjectProcessActivity == (int)ProjectProcessActivity.运营组设计)
             {
-                //上传文件
+                if (Request.Files.Count == 0)
+                {
+                    ModelState.AddModelError("file", "请上传文件!");
+                }
+                else
+                {
+                    ProjectProcessService.UpLoadFile(item, Request.Files[0]);
+                }
             }
-            else if (item.ProjectProcessActivity == (int)ProjectProcessActivity.运营组设计)
-            {
-                //上传文件
-            }
 
 
-
-
-
-
-            WorkFlowContext.RunInstance_ProjectProcess(item, agree);
 
             if (ModelState.IsValid)
             {
+                WorkFlowContext.RunInstance_ProjectProcess(item, agree);
                 return RedirectFrom();
             }
             else
@@ -145,15 +154,6 @@ namespace WEB.Controllers
                 }
             }
         }
-
-        public ActionResult ProjectProcess2(int id, bool agree)
-        {
-            var user = UserService.GetUserByCookie();
-            var project = ProjectProcessService.GetById(id);
-            WorkFlowContext.RunInstance_ProjectProcess(project, agree);
-            return Content("ok");
-        }
-
         #endregion
 
     }

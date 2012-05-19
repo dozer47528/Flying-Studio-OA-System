@@ -1,0 +1,25 @@
+﻿@model MODEL.LeaveProcess
+@{
+    ViewBag.Title = "审批请假流程 | 工作流平台 | 办公OA系统";
+    Layout = "~/Views/Process/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("所有任务", "Index", "Process") &raquo;
+    @Html.ActionLink("审批流程", "ProcessLeaveProcess", "Process", new { @class = "active" })
+    @if (Request.UrlReferrer != null)
+    {
+        @Html.Raw(" &raquo; ")
+        <a href="@Request.UrlReferrer.ToString()">返回来源页面</a>
+    }
+</h2>
+<div id="main">
+    <br />
+        <fieldset>
+            <p>
+                @Html.LabelFor(m => m.Memo)
+                <br />
+                <br />
+                @Html.TextAreaFor(m => m.Memo, new { @readonly = "readonly" })
+            </p>
+        </fieldset>
+</div>
