@@ -28,9 +28,9 @@
                 <div id="chart_div"></div>
             </p>
             <p>
-                <input type="radio" id="agree_1" name="agree" value="true" /><label for="agree_1">同意
+                <input type="radio" id="agree_1" name="agree" value="true" /><label for="agree_1">我赞同
                 </label>
-                <input type="radio" id="agree_0" name="agree" value="false" /><label for="agree_0">不同意
+                <input type="radio" id="agree_0" name="agree" value="false" /><label for="agree_0">我不赞同
                 </label>
                 @Html.ValidationMessage("agree")
             </p>
@@ -38,10 +38,11 @@
         <input type="submit" value="提交" />
     }
 </div>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
+@section Script {
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
     google.load('visualization', '1.0', { 'packages': ['corechart'] });
-    google.setOnLoadCallback(drawChart);
+    
     function drawChart() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
@@ -61,4 +62,7 @@
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
-</script>
+
+    google.setOnLoadCallback(drawChart);
+    </script>
+}

@@ -19,6 +19,7 @@ namespace DAL
         public DbSet<LeaveProcess> LeaveProcesses { get; set; }
         public DbSet<ProjectProcess> ProjectProcesses { get; set; }
         public DbSet<AppraisalResult> AppraisalResults { get; set; }
+        public DbSet<CheckIn> CheckIns { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -181,8 +182,14 @@ namespace DAL
             db.Users.Add(user6);
             #endregion
 
+            db.SaveChanges();
+        }
+
+        public static void InitDebugData(this OAContext db)
+        {
             #region 文章
-            for (var k = 0; k < 100; k++)
+            var user = db.Users.FirstOrDefault();
+            for (var k = 0; k < 10; k++)
             {
                 var article = new Article
                 {
@@ -196,7 +203,23 @@ namespace DAL
             }
             #endregion
 
-
+            #region 签到
+            var user2 = db.Users.FirstOrDefault();
+            var rnd = new Random();
+            for (var k = 2; k < 25; k++)
+            {
+                var checkInTime = new DateTime(2012, 5, k, 9 + rnd.Next(-2, 2), 0, 0);
+                var checkOutTime = new DateTime(2012, 5, k, 18 + rnd.Next(-1, 4), 0, 0);
+                db.CheckIns.Add(new CheckIn
+                {
+                    CheckInTime = checkInTime,
+                    CheckOutTime = checkOutTime,
+                    IsHoliday = (checkInTime.DayOfWeek == DayOfWeek.Saturday || checkInTime.DayOfWeek == DayOfWeek.Sunday),
+                    User = user2,
+                    Memo = "test",
+                });
+            }
+            #endregion
             db.SaveChanges();
         }
     }

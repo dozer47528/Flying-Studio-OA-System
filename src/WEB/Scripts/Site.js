@@ -85,3 +85,27 @@ function Logout(url) {
 		    alert('退出成功！');
 		}, "json");
 }
+
+function CheckIn(url) {
+    $.post(url, {},
+		function (data, textStatus) {
+		    if (data.Result) {
+		        alert('上班签到成功！请不要忘了下班签到！');
+		    }
+		    else {
+		        alert('上班签到失败！每天只能签到一次！');
+		    }
+		}, "json");
+}
+
+function CheckOut(url) {
+    $.post(url, {},
+		function (data, textStatus) {
+		    if (data.Result) {
+		        alert('下班签到成功！如果继续加班可以再次点击下班签到！');
+		    }
+		    else {
+		        alert('签到失败！是否忘了上班签到？');
+		    }
+		}, "json");
+}

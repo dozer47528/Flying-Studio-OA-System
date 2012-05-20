@@ -43,6 +43,7 @@ namespace WEB
                 db.Database.Create();
                 db.InitData();
                 db.InitTestData();
+                db.InitDebugData();
                 db.SaveChanges();
             }
 

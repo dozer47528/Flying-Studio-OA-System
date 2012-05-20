@@ -25,22 +25,24 @@ namespace WEB.Controllers
             }
         }
         protected readonly UserService UserService;
-        protected readonly InboxService InboxService;
+        protected readonly CheckInService InboxService;
         protected readonly ArticleService ArticleService;
         protected readonly UserRoleService UserRoleService;
         protected readonly UploadFileService UploadFileService;
         protected readonly LeaveProcessService LeaveProcessService;
         protected readonly ProjectProcessService ProjectProcessService;
+        protected readonly CheckInService CheckInService;
 
         public BaseController()
         {
             UserService = new UserService(db);
-            InboxService = new InboxService(db);
+            InboxService = new CheckInService(db);
             ArticleService = new ArticleService(db);
             UserRoleService = new UserRoleService(db);
             UploadFileService = new UploadFileService(db);
             LeaveProcessService = new LeaveProcessService(db);
             ProjectProcessService = new ProjectProcessService(db);
+            CheckInService = new CheckInService(db);
 
             ViewBag.IsLogin = UserService.GetUserByCookie() != null;
         }

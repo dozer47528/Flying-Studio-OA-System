@@ -4,9 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLL;
+using MODEL;
+using WEB.Filters;
 
 namespace WEB.Controllers
 {
+    [TheAuthorizationFilter(AllowRoles = UserRoleEnum.全员)]
     public class UploadFileController : BaseController
     {
 

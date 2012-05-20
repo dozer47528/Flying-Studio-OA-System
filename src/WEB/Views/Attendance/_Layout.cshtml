@@ -1,0 +1,22 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div id="sidebar">
+    <ul class="sideNav">
+        <li><a class="action_Index" href="@Url.Action("Index")">我的本月考勤报告</a></li>
+        <li><a class="action_All" href="@Url.Action("All")">下属的考勤报告</a></li>
+        <li>
+            <br />
+            <br />
+        </li>
+        <li><a href="javascript:CheckIn('@Url.Action("CheckIn")')">上班签到 </a></li>
+        <li><a href="javascript:CheckOut('@Url.Action("CheckOut")')">下班签到</a></li>
+    </ul>
+    <!-- // .sideNav -->
+</div>
+<!-- // #sidebar -->
+@RenderBody()
+<div class="clear"></div>
+@section Script{
+    @RenderSection("Script", false)
+}

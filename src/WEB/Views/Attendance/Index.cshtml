@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "我的本月考勤报告 | 考勤平台 | 办公OA系统";
+    Layout = "~/Views/Attendance/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("我的本月考勤报告", "Index", "Attendance") &raquo; </h2>
+<div id="main">
+    <div id="chart_div"></div>
+</div>
+<!-- // #main -->
+@section Script {
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    google.load('visualization', '1.0', { 'packages': ['corechart'] });
+    
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows([
+          ['总工作时间', @ViewBag.All],
+          ['总迟到时间', @ViewBag.Late],
+          ['总加班时间', @ViewBag.Early],
+        ]);
+
+        // Set chart options
+        var options = {
+            'title': '考勤报告',
+            'width': 400,
+            'height': 300
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+
+    google.setOnLoadCallback(drawChart);
+    </script>
+}

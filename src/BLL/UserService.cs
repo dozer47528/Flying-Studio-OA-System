@@ -33,10 +33,15 @@ namespace BLL
             {
                 int id;
                 if (!int.TryParse(CookieHelper.Get(USER_ID_NAME), out id)) id = 0;
+                CookieHelper.Post(USER_ID_NAME, id.ToString());
                 var user = db.Users.Include("Role").SingleOrDefault(u => u.ID == id);
                 context.Items["User"] = user;
             }
             return context.Items["User"] as User;
+        }
+
+        public User GetById(int id) {
+            return db.Users.Single(u => u.ID == id);
         }
 
         public UserRole LoadFartherRole(User user)
@@ -49,6 +54,12 @@ namespace BLL
         public int Count()
         {
             return db.Users.Count();
+        }
+
+        public List<User> GetSubordinates(User user)
+        {
+            LoadReference(user, u => u.Role);
+            return db.Users.Where(u => u.Role.FatherRole.ID == user.Role.ID).ToList();
         }
     }
 }
