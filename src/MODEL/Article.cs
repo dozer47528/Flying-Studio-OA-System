@@ -27,7 +27,6 @@ namespace MODEL
         [Display(Name = "内容")]
         public string Content { get; set; }
         public DateTime AddDate { get; set; }
-        public bool IsDelete { get; set; }
         public User Owner { get; set; }
         [Display(Name = "权限")]
         public int Authority { get; set; }

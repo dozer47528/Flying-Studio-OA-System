@@ -15,5 +15,10 @@ namespace WEB.Controllers
         {
             return View();
         }
+
+        public ActionResult Login() {
+            Response.Write("<script>alert('请点右上角的“登录”按钮登录！');</script>");
+            return View("Index");
+        }
     }
 }

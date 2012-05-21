@@ -194,10 +194,10 @@ namespace DAL
                 var article = new Article
                 {
                     AddDate = DateTime.Now,
-                    Authority = user.Role.RoleEnum,
+                    Authority = (int)UserRoleEnum.全员,
                     Content = "text content",
                     Owner = user,
-                    Title = "title" + DateTime.Now.Ticks.ToString().Substring(5),
+                    Title = "测试文章：" + DateTime.Now.Ticks.ToString().Substring(5),
                 };
                 db.Articles.Add(article);
             }

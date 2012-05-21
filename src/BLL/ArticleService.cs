@@ -27,6 +27,14 @@ namespace BLL
             Filter(q, search);
             return q.ToPagedList(page, pageSize);
         }
+        public PagedList<Article> GetAuthorizedList(User user, int page, int pageSize = 10, string search = null)
+        {
+            LoadReference(user, u => u.Role);
+            var q = db.Articles.Where(a => (a.Authority & user.Role.RoleEnum) == user.Role.RoleEnum).OrderByDescending(a => a.AddDate);
+            Filter(q, search);
+            return q.ToPagedList(page, pageSize);
+        }
+
         public Article Create(Article article, string autority)
         {
             article.Authority = string.IsNullOrEmpty(autority) ? 0 : AuthorityHelper.GetAuthority(autority.Split(','));
@@ -79,7 +87,7 @@ namespace BLL
             //上级主管也有权限修改
             LoadReference(owner, u => u.Role);
             LoadReference(owner.Role, r => r.FatherRole);
-            if (owner.Role.FatherRole.ID == user.Role.ID) return true;
+            if (owner.Role.FatherRole != null && owner.Role.FatherRole.ID == user.Role.ID) return true;
 
             return false;
         }

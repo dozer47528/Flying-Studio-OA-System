@@ -138,7 +138,9 @@
     <Content Include="Content\Images\content.gif" />
     <Content Include="Content\Images\input-shaddow-hover.gif" />
     <Content Include="Content\Images\input-shaddow.gif" />
+    <Content Include="Content\Images\LeaveProcess.jpg" />
     <Content Include="Content\Images\left-menu-bg.gif" />
+    <Content Include="Content\Images\ProjectProcess.jpg" />
     <Content Include="Content\Images\select_left.gif" />
     <Content Include="Content\Images\select_right.gif" />
     <Content Include="Content\Images\top-menu-bg.gif" />
@@ -606,6 +608,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Attendance\All.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\_Layout.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\OA.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

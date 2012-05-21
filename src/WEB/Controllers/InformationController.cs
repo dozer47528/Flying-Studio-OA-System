@@ -11,20 +11,21 @@ namespace WEB.Controllers
     [TheAuthorizationFilter(AllowRoles = UserRoleEnum.全员)]
     public class InformationController : BaseController
     {
+
         public ActionResult Index(int? id)
         {
             if (Request.IsAjaxRequest())
             {
-                return PartialView("_Index", ArticleService.GetList(id ?? 1));
+                return PartialView("_Index", ArticleService.GetAuthorizedList(UserService.GetUserByCookie(), id ?? 1));
             }
-            return View(ArticleService.GetList(id ?? 1));
+            return View(ArticleService.GetAuthorizedList(UserService.GetUserByCookie(), id ?? 1));
         }
 
         public ActionResult Create()
         {
             if (ConvertFromUrl()) return null;
             ViewBag.UserRole = UserRoleService.GetList();
-            return View(new Article());
+            return View(new Article { Authority = (int)UserRoleEnum.全员 });
         }
         [HttpPost]
         [ValidateInput(false)]
