@@ -37,15 +37,15 @@ namespace WF
         #endregion
 
         #region ProjectProcess
-        public static Guid CreateAndRun_ProjectProcess(int id)
+        public static Guid CreateAndRun_ProjectProcess(int id, int userID)
         {
             return CreateAndRun(
-                new Dictionary<string, object> { { "ProjectID", id } },
+                new Dictionary<string, object> { { "ProjectID", id }, { "InputUserID", id } },
                 new ProjectProcess.ProjectProcess());
         }
-        public static void RunInstance_ProjectProcess(MODEL.ProjectProcess model, bool isAgree = false)
+        public static void RunInstance_ProjectProcess(MODEL.ProjectProcess model, int userID)
         {
-            RunInstance(model.InstanceID, model.Bookmark, new ProjectProcess.ProjectProcess(), isAgree);
+            RunInstance(model.InstanceID, model.Bookmark, new ProjectProcess.ProjectProcess(), userID);
         }
         #endregion
 

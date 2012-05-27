@@ -13,6 +13,7 @@ namespace WF.ProjectProcess
     {
         protected override bool CanInduceIdle { get { return true; } }
         [RequiredArgument]
+        public InOutArgument<int> UserID { get; set; }
         public InArgument<int> ID { get; set; }
         protected override void Execute(NativeActivityContext context)
         {
@@ -31,7 +32,9 @@ namespace WF.ProjectProcess
 
         private void Continue(NativeActivityContext context, Bookmark bookmark, object obj)
         {
-            //完成
+            var userID = (int)obj;
+            UserID.Set(context, userID);
+
         }
     }
 }

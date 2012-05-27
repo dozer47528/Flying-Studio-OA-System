@@ -90,7 +90,7 @@ namespace WEB.Controllers
         {
             project.Owner = UserService.GetUserByCookie();
             ProjectProcessService.Create(project);
-            var guid = WorkFlowContext.CreateAndRun_ProjectProcess(project.ID);
+            var guid = WorkFlowContext.CreateAndRun_ProjectProcess(project.ID, project.Owner.ID);
             return RedirectFrom();
         }
 
@@ -140,7 +140,7 @@ namespace WEB.Controllers
 
             if (ModelState.IsValid)
             {
-                WorkFlowContext.RunInstance_ProjectProcess(item, agree);
+                WorkFlowContext.RunInstance_ProjectProcess(item, user.ID);
                 return RedirectFrom();
             }
             else

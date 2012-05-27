@@ -9,8 +9,16 @@ namespace MODEL
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        public string Content { get; set; }
-        public string Link { get; set; }
-        public string From { get; set; }
+        public int RedirectType { get; set; }
+        public int RedirectID { get; set; }
+        public bool IsRead { get; set; }
+        public ICollection<User> Users { get; set; }
+    }
+
+    public enum RedirectType
+    {
+        请假流程 = 1,
+        项目流程 = 2,
+        采购流程 = 3,
     }
 }

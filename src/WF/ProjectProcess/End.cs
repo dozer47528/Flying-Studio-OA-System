@@ -12,6 +12,7 @@ namespace WF.ProjectProcess
     public sealed class End : BaseActivity
     {
         [RequiredArgument]
+        public InOutArgument<int> UserID { get; set; }
         public InArgument<int> ID { get; set; }
         protected override void Execute(NativeActivityContext context)
         {

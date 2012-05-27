@@ -14,6 +14,7 @@ namespace WF.ProjectProcess
         protected override bool CanInduceIdle { get { return true; } }
         [RequiredArgument]
         public InArgument<int> ID { get; set; }
+        public InOutArgument<int> UserID { get; set; }
         public OutArgument<bool> Rusult { get; set; }
         protected override void Execute(NativeActivityContext context)
         {
@@ -32,6 +33,10 @@ namespace WF.ProjectProcess
 
         private void Continue(NativeActivityContext context, Bookmark bookmark, object obj)
         {
+            var userID = (int)obj;
+            UserID.Set(context, userID);
+
+
             var result = (bool)obj;
             if (result)
             {

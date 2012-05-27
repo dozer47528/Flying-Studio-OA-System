@@ -15,11 +15,11 @@ namespace DAL
         public DbSet<Article> Articles { get; set; }
         public DbSet<UploadFile> UploadFiles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<Inbox> Inboxs { get; set; }
         public DbSet<LeaveProcess> LeaveProcesses { get; set; }
         public DbSet<ProjectProcess> ProjectProcesses { get; set; }
         public DbSet<AppraisalResult> AppraisalResults { get; set; }
         public DbSet<CheckIn> CheckIns { get; set; }
+        public DbSet<Inbox> Inboxes { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

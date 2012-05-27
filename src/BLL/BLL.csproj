@@ -62,6 +62,7 @@
     <Compile Include="UserRoleService.cs" />
     <Compile Include="LeaveProcessService.cs" />
     <Compile Include="UserService.cs" />
+    <Compile Include="InboxService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
