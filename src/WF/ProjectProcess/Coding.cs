@@ -32,7 +32,8 @@ namespace WF.ProjectProcess
 
         private void Continue(NativeActivityContext context, Bookmark bookmark, object obj)
         {
-            var userID = (int)obj;
+            var args = (object[])obj;
+            var userID = (int)args[0];
             UserID.Set(context, userID);
 
         }

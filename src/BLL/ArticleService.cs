@@ -15,7 +15,6 @@ namespace BLL
         {
             return db.Articles.Single(a => a.ID == id);
         }
-
         public Article GetItemByIdWithAttachment(int id)
         {
             var item = db.Articles.Include("Attachment").Single(a => a.ID == id);
@@ -34,7 +33,6 @@ namespace BLL
             Filter(q, search);
             return q.ToPagedList(page, pageSize);
         }
-
         public Article Create(Article article, string autority)
         {
             article.Authority = string.IsNullOrEmpty(autority) ? 0 : AuthorityHelper.GetAuthority(autority.Split(','));
@@ -61,7 +59,6 @@ namespace BLL
             db.SaveChanges();
             return true;
         }
-
         private IQueryable<Article> Filter(IQueryable<Article> query, string search)
         {
             if (!string.IsNullOrEmpty(search))
@@ -72,7 +69,6 @@ namespace BLL
             }
             return query;
         }
-
         public bool CheckMyOwnOrAdmin(Article article, User user)
         {
             //执行站长可以修改所有

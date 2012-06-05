@@ -22,16 +22,16 @@
     上传
 </button>
 <script type="text/javascript">
-    function FileUpload(url) {
-        $.ajaxFileUpload({
-            url: url, //你处理上传文件的服务端
-            secureuri: false, //与页面处理代码中file相对应的ID值
-            fileElementId: 'fileInput',
-            dataType: 'text', //返回数据类型:text，xml，json，html,scritp,jsonp五种
-            success: function (data) {
-                $('#Attachment').html(data);
-                SetJqueryUI();
-            }
-        })
-    }
+function FileUpload(url) {
+    $.ajaxFileUpload({
+        url: url, //你处理上传文件的服务端
+        secureuri: false, //与页面处理代码中file相对应的ID值
+        fileElementId: 'fileInput',
+        dataType: 'text', //返回数据类型:text，xml，json，html,scritp,jsonp五种
+        success: function (data) {
+            $('#Attachment').html(data);
+            SetJqueryUI();
+        }
+    })
+}
 </script>

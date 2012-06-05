@@ -28,6 +28,7 @@ namespace WF
             UserRoleService = new UserRoleService(db);
             UploadFileService = new UploadFileService(db);
             LeaveProcessService = new LeaveProcessService(db);
+            ProjectProcessService = new ProjectProcessService(db);
             InboxService = new InboxService(db);
         }
     }

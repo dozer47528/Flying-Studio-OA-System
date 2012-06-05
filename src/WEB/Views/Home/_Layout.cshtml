@@ -4,6 +4,10 @@
 <div id="sidebar">
     <ul class="sideNav">
         <li><a class="action_Index" href="@Url.Action("Index")">欢迎</a></li>
+        @if (!(bool)ViewBag.Logined)
+        {
+            <li><a class="action_Login" href="@Url.Action("Login")">登陆</a></li>
+        }
     </ul>
     <!-- // .sideNav -->
 </div>

@@ -20,6 +20,7 @@ namespace WF.ProjectProcess
             var id = ID.Get(context);
             var bookmark = UserRoleEnum.运营组成员.ToString();
             var item = ProjectProcessService.GetById(id);
+            ProjectProcessService.LoadReference(item, i => i.Owner);
             item.NextProcessAuthority = (int)UserRoleEnum.运营组成员;
             item.Bookmark = bookmark;
             item.ProjectProcessActivity = (int)ProjectProcessActivity.运营组设计;
@@ -30,8 +31,10 @@ namespace WF.ProjectProcess
 
         private void Continue(NativeActivityContext context, Bookmark bookmark, object obj)
         {
-            var userID = (int)obj;
+            var args = (object[])obj;
+            var userID = (int)args[0];
             UserID.Set(context, userID);
+
 
         }
     }

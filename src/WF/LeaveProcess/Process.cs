@@ -48,7 +48,10 @@ namespace WF.LeaveProcess
             {
                 LeaveProcessService.Create(model);
             }
+            Model.Set(context, model);
 
+            InboxService.Create((UserRoleEnum)model.NextProcessAuthority, model.ID, RedirectType.请假流程处理, InboxService.NEED_TO_PROCESS_LEAVE, model.ID.ToString(), model.Owner.NickName);
+            InboxService.Create(model.Owner.ID, model.ID, RedirectType.请假流程查看, InboxService.WAIT_TO_PROCESS_LEAVE, model.ID.ToString(), ((UserRoleEnum)model.NextProcessAuthority).ToString());
             context.CreateBookmark(Role.ToString(),
                 new BookmarkCallback(this.Continue));
         }
@@ -57,6 +60,7 @@ namespace WF.LeaveProcess
         {
             var result = (bool)obj;
             Agree.Set(context, result);
-        }
+
+         }
     }
 }

@@ -6,40 +6,47 @@
     @Html.ActionLink("首页", "Index", "Home", new { @class = "active" })
 </h2>
 <div id="main">
-    <h3>功能介绍</h3>
-    <div>
-        <ul>
-            <li><b>信息共享平台</b></li>
-            <li>1.最新公告</li>
-            <li>2.新增公告</li>
-            <li>
-                <br />
-            </li>
-            <li><b>工作流平台</b></li>
-            <li>1.所有任务</li>
-            <li>2.我申请的流程</li>
-            <li>3.新建请假流程</li>
-            <li>4.新建项目流程</li>
-            <li>
-                <br />
-            </li>
-            <li><b>考聘平台</b></li>
-            <li>1.我的本月考勤报告</li>
-            <li>2.下属的考勤报告</li>
-            <li>3.上班签到</li>
-            <li>4.下班签到</li>
-        </ul>
-    </div>
     <br />
-    <br />
-    <br />
-    <br />
-    <h3>流程图介绍</h3>
-    <div>
-        <img src="@Url.Content("~/Content/Images/LeaveProcess.jpg")" alt="Alternate Text" />
-    </div>
-    <div>
-        <img src="@Url.Content("~/Content/Images/ProjectProcess.jpg")" alt="Alternate Text" />
-    </div>
+
+    @if ((ViewBag.Inboxes as IEnumerable<Inbox>).Count() != 0)
+    {
+        <h3>收件箱 @Html.ActionLink("（更多）", "Inbox", "Information")</h3>
+        <table>
+            @{bool line2 = true;}
+            @foreach (var inbox in ViewBag.Inboxes as IEnumerable<Inbox>)
+            { 
+                <tr class="@string.Format(line2 ? "odd" : "")">
+                    <td>@inbox.Title
+                    </td>
+                    <td class="action"><a target="_blank" onclick="return reflash(this);" href="@Url.Action("Redirect", "Process", new
+                                       {
+                                           id = inbox.RedirectID,
+                                           type = inbox.RedirectType,
+                                           inboxID = inbox.ID
+                                       })" class="view">处理</a></td>
+                </tr>
+                line2 = !line2;
+            }
+        </table>
+    }
+    @if ((ViewBag.Process as IEnumerable<BaseProcess>).Count() != 0)
+    {
+        <br />
+        <h3>需要处理的流程 @Html.ActionLink("（更多）", "Index", "Process")</h3>
+
+        <table>
+            @{bool line = true;}
+            @foreach (var process in ViewBag.Process as IEnumerable<BaseProcess>)
+            { 
+                <tr class="@string.Format(line ? "odd" : "")">
+                    <td>@string.Format("[{0}][申请人：{1}]  {2}", process.ProcessName, process.Owner.NickName, process.Memo.SubByte(20))
+                    </td>
+                    <td class="action"><a href="@Url.Action("Process" + process.GetType().Name, "Process", new { id = process.ID })" class="view">
+                        处理</a></td>
+                </tr>
+                line = !line;
+            }
+        </table>
+    }
 </div>
 <!-- // #main -->

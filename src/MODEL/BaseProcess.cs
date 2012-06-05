@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 
@@ -17,6 +18,8 @@ namespace MODEL
         public DateTime Adddate { get; set; }
         public bool Passed { get; set; }
         public bool Finished { get; set; }
+        [Display(Name = "描述"), Required]
+        public string Memo { get; set; }
     }
 
 }

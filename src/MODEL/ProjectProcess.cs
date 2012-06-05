@@ -12,8 +12,7 @@ namespace MODEL
         {
             ProcessName = "项目流程";
         }
-        [Display(Name = "项目描述"), Required]
-        public string Memo { get; set; }
+
 
         [Display(Name = "设计稿")]
         public string File1 { get; set; }

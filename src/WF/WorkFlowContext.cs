@@ -47,6 +47,10 @@ namespace WF
         {
             RunInstance(model.InstanceID, model.Bookmark, new ProjectProcess.ProjectProcess(), userID);
         }
+        public static void RunInstance_ProjectProcess(MODEL.ProjectProcess model, int userID, bool isAgree)
+        {
+            RunInstance(model.InstanceID, model.Bookmark, new ProjectProcess.ProjectProcess(), new object[] { userID, isAgree });
+        }
         #endregion
 
         #region Private

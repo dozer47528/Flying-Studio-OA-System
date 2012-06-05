@@ -109,3 +109,8 @@ function CheckOut(url) {
 		    }
 		}, "json");
 }
+
+function reflash(item) {
+    $(item).parent().parent().remove();
+    return true;
+}

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "收件箱 | 信息共享平台 | 办公OA系统";
+    Layout = "~/Views/Information/_Layout.cshtml";
+}
+<h2>
+    @Html.ActionLink("收件箱", "Inbox", "Home", new { @class = "active" })
+</h2>
+<div id="main">
+    <br />
+    <table>
+        @{bool line2 = true;}
+        @foreach (var inbox in ViewBag.Inboxes as IEnumerable<Inbox>)
+        { 
+            <tr class="@string.Format(line2 ? "odd" : "")">
+                <td>@inbox.Title
+                </td>
+                <td class="action"><a target="_blank" onclick="return reflash(this);" href="@Url.Action("Redirect", "Process", new
+                                       {
+                                           id = inbox.RedirectID,
+                                           type = inbox.RedirectType,
+                                           inboxID = inbox.ID
+                                       })" class="view">处理</a></td>
+            </tr>
+            line2 = !line2;
+        }
+    </table>
+</div>
+<!-- // #main -->

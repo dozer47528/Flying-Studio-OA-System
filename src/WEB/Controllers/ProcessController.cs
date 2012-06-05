@@ -21,7 +21,7 @@ namespace WEB.Controllers
             var list2 = ProjectProcessService.GetAllNeedToProcess(user).Select(u => u as BaseProcess);
             result.AddRange(list);
             result.AddRange(list2);
-            return View(result);
+            return View(result.OrderBy(p => p.Adddate).ToList());
         }
 
         public ActionResult My()
@@ -32,7 +32,7 @@ namespace WEB.Controllers
             var list2 = ProjectProcessService.GetMyProcess(user).Select(u => u as BaseProcess);
             result.AddRange(list);
             result.AddRange(list2);
-            return View(result);
+            return View(result.OrderByDescending(p => p.Adddate).ToList());
         }
 
         #region LeaveProcess
@@ -59,7 +59,16 @@ namespace WEB.Controllers
         public ActionResult ProcessLeaveProcess(int? id)
         {
             if (ConvertFromUrl()) return null;
-            return View(LeaveProcessService.GetById(id ?? 0));
+            var item = LeaveProcessService.GetById(id ?? 0);
+            var user = UserService.GetUserByCookie();
+            if ((item.NextProcessAuthority & user.Role.RoleEnum) == user.Role.RoleEnum && !item.Finished)
+            {
+                return View(item);
+            }
+            else
+            {
+                return RedirectToAction("ViewLeaveProcess", new { id = id ?? 0 });
+            }
         }
         [HttpPost]
         public ActionResult ProcessLeaveProcess(int? id, bool agree)
@@ -108,7 +117,16 @@ namespace WEB.Controllers
             }
             else
             {
-                return View(item);
+                var user = UserService.GetUserByCookie();
+                if ((item.NextProcessAuthority & user.Role.RoleEnum) == user.Role.RoleEnum && !item.Finished)
+                {
+                    return View(item);
+                }
+                else
+                {
+                    return RedirectToAction("ViewLeaveProcess", new { id = id });
+                }
+
             }
         }
         [HttpPost]
@@ -140,7 +158,7 @@ namespace WEB.Controllers
 
             if (ModelState.IsValid)
             {
-                WorkFlowContext.RunInstance_ProjectProcess(item, user.ID);
+                WorkFlowContext.RunInstance_ProjectProcess(item, user.ID, agree);
                 return RedirectFrom();
             }
             else
@@ -157,5 +175,38 @@ namespace WEB.Controllers
         }
         #endregion
 
+
+        public ActionResult Redirect(int id, int type, int inboxID)
+        {
+            InboxService.SetRead(inboxID);
+
+            var redirectType = (RedirectType)type;
+            switch (redirectType)
+            {
+                case RedirectType.请假流程查看:
+                    {
+                        return RedirectToAction("ViewLeaveProcess", new { id = id });
+                    }
+                case RedirectType.请假流程处理:
+                    {
+                        return RedirectToAction("ProcessLeaveProcess", new { id = id });
+                    }
+
+                case RedirectType.项目流程查看:
+                    {
+                        return RedirectToAction("ViewProjectProcess", new { id = id });
+                    }
+                case RedirectType.项目流程处理:
+                    {
+                        return RedirectToAction("ProcessProjectProcess", new { id = id });
+                    }
+                default:
+                    {
+                        return RedirectToAction("Index");
+
+                    }
+
+            }
+        }
     }
 }

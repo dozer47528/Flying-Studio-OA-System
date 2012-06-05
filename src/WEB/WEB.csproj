@@ -614,6 +614,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\OA.pubxml" />
+    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Information\Inbox.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

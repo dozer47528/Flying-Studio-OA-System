@@ -25,7 +25,7 @@ namespace WEB.Controllers
             }
         }
         protected readonly UserService UserService;
-        protected readonly CheckInService InboxService;
+        protected readonly InboxService InboxService;
         protected readonly ArticleService ArticleService;
         protected readonly UserRoleService UserRoleService;
         protected readonly UploadFileService UploadFileService;
@@ -36,7 +36,7 @@ namespace WEB.Controllers
         public BaseController()
         {
             UserService = new UserService(db);
-            InboxService = new CheckInService(db);
+            InboxService = new InboxService(db);
             ArticleService = new ArticleService(db);
             UserRoleService = new UserRoleService(db);
             UploadFileService = new UploadFileService(db);

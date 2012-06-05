@@ -11,7 +11,11 @@ namespace WEB.Controllers
     [TheAuthorizationFilter(AllowRoles = UserRoleEnum.全员)]
     public class InformationController : BaseController
     {
-
+        public ActionResult Inbox()
+        {
+            ViewBag.Inboxes = InboxService.GetByList(UserService.GetUserByCookie());
+            return View();
+        }
         public ActionResult Index(int? id)
         {
             if (Request.IsAjaxRequest())

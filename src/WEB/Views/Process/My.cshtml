@@ -13,7 +13,7 @@
             @foreach (var process in Model)
             { 
                 <tr class="@string.Format(line ? "odd" : "")">
-                    <td>@string.Format("{0} [申请人：{1}] [是否通过：{2}]", process.ProcessName, process.Owner.NickName, process.Passed ? "是" : "否")
+                    <td>@string.Format("[{0}][是否通过：{2}]  {1}", process.ProcessName, process.Memo.SubByte(20), process.Passed ? "是" : "否")
                     </td>
                     <td class="action"><a href="@Url.Action("View" + process.GetType().Name, new { id = process.ID })" class="view">
                         查看</a></td>

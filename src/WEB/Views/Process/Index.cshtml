@@ -13,7 +13,7 @@
             @foreach (var process in Model)
             { 
                 <tr class="@string.Format(line ? "odd" : "")">
-                    <td>@string.Format("{0} [申请人：{1}]", process.ProcessName, process.Owner.NickName)
+                    <td>@string.Format("[{0}][申请人：{1}]  {2}", process.ProcessName, process.Owner.NickName, process.Memo.SubByte(20))
                     </td>
                     <td class="action"><a href="@Url.Action("Process" + process.GetType().Name, new { id = process.ID })" class="view">
                         处理</a></td>
