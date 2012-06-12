@@ -76,42 +76,42 @@ namespace DAL
             var role6 = db.UserRoles.First(u => u.RoleEnum == (int)UserRoleEnum.运营组成员);
             var user = new User
             {
-                NickName = "Dozer",
+                NickName = "龚昱阳",
                 FirstName = "昱阳",
                 LastName = "龚",
                 Email = "mail@dozer.cc",
                 FirstLoginDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
                 LoginTimes = 0,
-                Password = "123456".MD5(),
+                Password = "1".MD5(),
                 Role = role,
                 Username = "gongyuyang",
             };
 
             var user1 = new User
             {
-                NickName = "小波",
+                NickName = "简小波",
                 FirstName = "小波",
                 LastName = "简",
                 Email = "jianxiaobo@gmail.com",
                 FirstLoginDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
                 LoginTimes = 0,
-                Password = "123456".MD5(),
+                Password = "1".MD5(),
                 Role = role1,
                 Username = "jianxiaobo",
             };
 
             var user2 = new User
             {
-                NickName = "小羊",
+                NickName = "王洋",
                 FirstName = "洋",
                 LastName = "王",
                 Email = "wangyang@gmail.com",
                 FirstLoginDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
                 LoginTimes = 0,
-                Password = "123456".MD5(),
+                Password = "1".MD5(),
                 Role = role2,
                 Username = "wangyang",
             };
@@ -125,21 +125,21 @@ namespace DAL
                 FirstLoginDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
                 LoginTimes = 0,
-                Password = "123456".MD5(),
+                Password = "1".MD5(),
                 Role = role3,
                 Username = "zhangxiang",
             };
 
             var user4 = new User
             {
-                NickName = "Pieux",
+                NickName = "奚杉杉",
                 FirstName = "杉杉",
                 LastName = "奚",
                 Email = "xishanshan@gmail.com",
                 FirstLoginDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
                 LoginTimes = 0,
-                Password = "123456".MD5(),
+                Password = "1".MD5(),
                 Role = role4,
                 Username = "xishanshan",
             };
@@ -147,27 +147,27 @@ namespace DAL
 
             var user5 = new User
             {
-                NickName = "胖子",
+                NickName = "李准",
                 FirstName = "准",
                 LastName = "李",
                 Email = "lizhun@gmail.com",
                 FirstLoginDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
                 LoginTimes = 0,
-                Password = "123456".MD5(),
+                Password = "1".MD5(),
                 Role = role5,
                 Username = "lizhun",
             };
             var user6 = new User
             {
-                NickName = "爽新",
+                NickName = "陈爽新",
                 FirstName = "爽新",
                 LastName = "陈",
                 Email = "chenshuangxin@gmail.com",
                 FirstLoginDate = DateTime.Now,
                 LastLoginDate = DateTime.Now,
                 LoginTimes = 0,
-                Password = "123456".MD5(),
+                Password = "1".MD5(),
                 Role = role6,
                 Username = "chenshuangxin",
             };
@@ -187,37 +187,39 @@ namespace DAL
 
         public static void InitDebugData(this OAContext db)
         {
-            #region 文章
-            var user = db.Users.FirstOrDefault();
-            for (var k = 0; k < 10; k++)
-            {
-                var article = new Article
-                {
-                    AddDate = DateTime.Now,
-                    Authority = (int)UserRoleEnum.全员,
-                    Content = "text content",
-                    Owner = user,
-                    Title = "测试文章：" + DateTime.Now.Ticks.ToString().Substring(5),
-                };
-                db.Articles.Add(article);
-            }
-            #endregion
+            //#region 文章
+            //var user = db.Users.FirstOrDefault();
+            //for (var k = 0; k < 10; k++)
+            //{
+            //    var article = new Article
+            //    {
+            //        AddDate = DateTime.Now,
+            //        Authority = (int)UserRoleEnum.全员,
+            //        Content = "text content",
+            //        Owner = user,
+            //        Title = "测试文章：" + DateTime.Now.Ticks.ToString().Substring(5),
+            //    };
+            //    db.Articles.Add(article);
+            //}
+            //#endregion
 
             #region 签到
-            var user2 = db.Users.FirstOrDefault();
-            var rnd = new Random();
-            for (var k = 2; k < 25; k++)
+            foreach (var user2 in db.Users)
             {
-                var checkInTime = new DateTime(2012, 5, k, 9 + rnd.Next(-2, 2), 0, 0);
-                var checkOutTime = new DateTime(2012, 5, k, 18 + rnd.Next(-1, 4), 0, 0);
-                db.CheckIns.Add(new CheckIn
+                var rnd = new Random();
+                for (var k = 2; k < DateTime.Now.Day; k++)
                 {
-                    CheckInTime = checkInTime,
-                    CheckOutTime = checkOutTime,
-                    IsHoliday = (checkInTime.DayOfWeek == DayOfWeek.Saturday || checkInTime.DayOfWeek == DayOfWeek.Sunday),
-                    User = user2,
-                    Memo = "test",
-                });
+                    var checkInTime = new DateTime(2012, DateTime.Now.Month, k, 9 + rnd.Next(-2, 2), 0, 0);
+                    var checkOutTime = new DateTime(2012, DateTime.Now.Month, k, 18 + rnd.Next(-1, 4), 0, 0);
+                    db.CheckIns.Add(new CheckIn
+                    {
+                        CheckInTime = checkInTime,
+                        CheckOutTime = checkOutTime,
+                        IsHoliday = (checkInTime.DayOfWeek == DayOfWeek.Saturday || checkInTime.DayOfWeek == DayOfWeek.Sunday),
+                        User = user2,
+                        Memo = "test",
+                    });
+                }
             }
             #endregion
             db.SaveChanges();

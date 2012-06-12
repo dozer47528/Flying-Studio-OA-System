@@ -64,13 +64,13 @@ namespace WF.ProjectProcess
                 if (appraisalResult.Item1 > appraisalResult.Item2 * 2)//同意的人数大于不同意人数的两倍
                 {
                     result = 1;
-                    InboxService.Create(UserRoleEnum.全员, item.ID, RedirectType.项目流程查看, InboxService.APPRAISAL_FINISH_PROCESS_PROJECT, item.ID.ToString(), appraisalResult.Item1.ToString(), appraisalResult.Item2.ToString(), "通过");
+                    InboxService.Create(UserRoleEnum.全员, item.ID, RedirectType.项目流程查看, InboxService.APPRAISAL_FINISH_PROCESS_PROJECT, item.ID.ToString(), appraisalResult.Item1.ToString(), appraisalResult.Item2.ToString(), "通过", item.Owner.NickName);
                     InboxService.Create(UserRoleEnum.运营组成员, item.ID, RedirectType.项目流程处理, InboxService.DESIGN_PROCESS_PROJECT, item.ID.ToString(), item.Owner.NickName);
                 }
                 else
                 {
                     result = -1;
-                    InboxService.Create(UserRoleEnum.全员, item.ID, RedirectType.项目流程查看, InboxService.APPRAISAL_FINISH_PROCESS_PROJECT, item.ID.ToString(), appraisalResult.Item1.ToString(), appraisalResult.Item2.ToString(), "不通过");
+                    InboxService.Create(UserRoleEnum.全员, item.ID, RedirectType.项目流程查看, InboxService.APPRAISAL_FINISH_PROCESS_PROJECT, item.ID.ToString(), appraisalResult.Item1.ToString(), appraisalResult.Item2.ToString(), "不通过", item.Owner.NickName);
                 }
             }
             Rusult.Set(context, result);

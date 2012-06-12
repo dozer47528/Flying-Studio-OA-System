@@ -20,7 +20,7 @@ namespace BLL
 
         #region ProjectProcessString
         public const string APPRAISAL_PROCESS_PROJECT = "[{0}]{1} 提议了一个项目，大家看看是否可行吧!";
-        public const string APPRAISAL_FINISH_PROCESS_PROJECT = "[{0}]{1} 提议了一个项目评审完毕! {1} 人同意, {2} 人不同意。最终{3}!";
+        public const string APPRAISAL_FINISH_PROCESS_PROJECT = "[{0}]{4} 提议了一个项目评审完毕! {1} 人同意, {2} 人不同意。最终{3}!";
 
         public const string DESIGN_PROCESS_PROJECT = "[{0}]{1} 提议的项目通过评审了，赶快开始设计吧!";
         public const string DESIGN_AGAIN_PROCESS_PROJECT = "[{0}]{1} 提议的项目设计未通过，请再次加工!";

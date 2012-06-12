@@ -124,7 +124,7 @@ namespace WEB.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("ViewLeaveProcess", new { id = id });
+                    return RedirectToAction("ViewProjectProcess", new { id = id });
                 }
 
             }
