@@ -12,11 +12,6 @@ namespace WEB.Controllers
 {
     public class HomeController : BaseController
     {
-        public HomeController()
-        {
-            ViewBag.Logined = UserService.GetUserByCookie() != null;
-        }
-
         [TheAuthorizationFilter(AllowRoles = UserRoleEnum.全员)]
         public ActionResult Index()
         {

@@ -20,11 +20,19 @@
             </li>
             <li><a class="controller_Attendance" href="@Url.Action("Index", "Attendance")">¿¼ÇÚÆ½Ì¨</a>
             </li>
+
+
             @{var isLogin = (bool)ViewBag.IsLogin;}
             <li class="logout" id="login" style="@(isLogin ? "display: none" : "")"><a href="javascript:LoginForm();">
                 µÇÂ¼</a></li>
             <li class="logout" id="logout" style="@(isLogin ? "" : "display: none")"><a href="javascript:Logout('@Url.Action("Logout", "User")');">
                 ÍË³ö</a></li>
+
+            @if (isLogin)
+            { 
+                <li class="logout"><a>»¶Ó­Äã£¡@((ViewBag.User as User).NickName)
+                </a></li>
+            }
         </ul>
         <!-- // #end mainNav -->
         <div id="containerHolder">
@@ -68,5 +76,5 @@
 <script src="@Url.Content("~/Scripts/ajaxfileupload.js")"></script>
 <script src="@Url.Content("~/Scripts/xheditor/xheditor.js")"></script>
 <script src="@Url.Content("~/Scripts/Site.js")"></script>
-@RenderSection("Script",false)
+@RenderSection("Script", false)
 </html>

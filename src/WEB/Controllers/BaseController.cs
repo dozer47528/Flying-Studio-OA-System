@@ -44,7 +44,9 @@ namespace WEB.Controllers
             ProjectProcessService = new ProjectProcessService(db);
             CheckInService = new CheckInService(db);
 
-            ViewBag.IsLogin = UserService.GetUserByCookie() != null;
+            var user = UserService.GetUserByCookie();
+            ViewBag.IsLogin = user != null;
+            ViewBag.User = user;
         }
 
         protected bool ConvertFromUrl()
